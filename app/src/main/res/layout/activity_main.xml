@@ -10,179 +10,286 @@
             name="isShowRecentList"
             type="Boolean" />
 
+        <variable
+            name="showMusicPlayer"
+            type="Boolean" />
+
         <import type="android.view.View" />
     </data>
 
-    <RelativeLayout
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:layoutDirection="ltr">
 
-        <RelativeLayout
-            android:id="@+id/topPanel"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/top_panel_background"
-            android:elevation="12dp"
-            android:paddingTop="@dimen/margin_top_all_activity"
-            android:paddingBottom="12dp">
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            >
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/custom_app_bar" />
 
             <RelativeLayout
                 android:id="@+id/custom_app_bar"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/height_app_bar"
-                android:elevation="@dimen/elevation_app_bar"
+                android:layout_height="?actionBarSize"
+                android:layoutDirection="ltr"
                 android:paddingStart="@dimen/padding_standard"
-                android:paddingEnd="@dimen/padding_standard">
+                android:paddingEnd="@dimen/padding_standard"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/moreSettings"
-                    android:layout_width="@dimen/icon_size_default"
-                    android:layout_height="@dimen/icon_size_default"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:foreground="?selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_settings"
-                    app:tint="@color/white" />
-
-                <com.makeramen.roundedimageview.RoundedImageView
-                    android:id="@+id/appIcon"
+                    android:id="@+id/ic_open_drawer"
                     android:layout_width="@dimen/icon_size_default"
                     android:layout_height="@dimen/icon_size_default"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/magnetic_icon"
-                    app:riv_oval="true" />
+                    android:clickable="true"
+                    android:foreground="?selectableItemBackgroundBorderless"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_drawer_menu"
+                    app:tint="?iconTint" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginStart="12dp"
-                    android:layout_toEndOf="@id/appIcon"
-                    android:fontFamily="serif-monospace"
+                    android:layout_marginStart="@dimen/margin_standard"
+                    android:layout_toEndOf="@id/ic_open_drawer"
                     android:text="@string/app_name"
-                    android:textColor="@color/white"
+                    android:textColor="?android:textColor"
                     android:textSize="@dimen/text_size_app_name"
                     android:textStyle="bold"
                     tools:ignore="RelativeOverlap" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/search_button"
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/btn_search"
                     android:layout_width="@dimen/icon_size_default"
                     android:layout_height="@dimen/icon_size_default"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/margin_standard"
-                    android:layout_toStartOf="@id/moreSettings"
+                    android:background="@android:color/transparent"
+                    android:clickable="true"
+                    android:contentDescription="@string/search_hint"
                     android:foreground="?selectableItemBackgroundBorderless"
                     android:src="@drawable/ic_search"
-                    app:tint="@color/white" />
-
+                    android:tint="?iconTint" />
 
             </RelativeLayout>
 
-            <com.adivery.sdk.AdiveryBannerAdView
-                android:id="@+id/banner_ad"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/ads_banner_small"
-                android:layout_below="@id/custom_app_bar"
-                android:layout_marginStart="@dimen/ads_banner_small_margin_start_end"
-                android:layout_marginTop="@dimen/ads_banner_small_margin_top"
-                android:layout_marginEnd="@dimen/ads_banner_small_margin_start_end"
-                app:banner_size="banner"
-                android:layout_centerHorizontal="true"
-                android:visibility="gone"
-                />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/recentListLayout"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/bottom_navigation_bar_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/banner_ad"
-                android:layout_marginTop="6dp"
-                android:visibility="@{isShowRecentList ? View.VISIBLE : View.GONE,default = gone}">
+                android:layout_marginStart="@dimen/margin_standard"
+                android:layout_marginEnd="@dimen/margin_standard"
+                android:layout_marginBottom="@dimen/margin_standard"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:strokeColor="?colorSecondary"
+                app:strokeWidth="0.6dp">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:text="@string/recent_play"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_button"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@id/moreRecentList"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/moreRecentList" />
+                    android:background="?colorPrimary">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/moreRecentList"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="12dp"
-                    android:foreground="?selectableItemBackgroundBorderless"
-                    android:padding="4dp"
-                    android:text="@string/more"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="RelativeOverlap" />
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/tabLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/bottom_navigation_bar_height"
+                        android:elevation="12dp"
+                        android:background="?colorPrimary"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:tabBackground="?colorPrimary"
+                        app:tabGravity="fill"
+                        app:tabIndicatorFullWidth="false"
+                        app:tabIndicatorColor="?colorSecondary"
+                        app:tabMode="fixed"
+                        app:tabRippleColor="?colorSecondary"
+                        app:tabSelectedTextColor="?colorSecondary"
+                        app:tabTextColor="?android:textColor" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recentListRecyclerView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:clipToPadding="true"
-                    android:orientation="horizontal"
-                    android:paddingStart="4dp"
-                    android:scrollbars="none"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/moreRecentList"
-                    tools:ignore="RtlSymmetry"
-                    tools:itemCount="1"
-                    tools:listitem="@layout/popular_item" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/music_player"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:visibility="@{showMusicPlayer ? View.VISIBLE : View.GONE,default = gone}"
+                        app:layout_constraintBottom_toTopOf="@id/group_divider"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                        <ProgressBar
+                            android:id="@+id/progress_horizontal"
+                            style="@style/Widget.Material3.LinearProgressIndicator"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:indeterminate="false"
+                            android:progressDrawable="@drawable/progress_bar_music_player"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-        </RelativeLayout>
+                        <com.makeramen.roundedimageview.RoundedImageView
+                            android:id="@+id/cover_music"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:layout_marginStart="@dimen/margin_standard"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:scaleType="fitXY"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:riv_oval="true"
+                            tools:src="@drawable/ic_music" />
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_below="@id/topPanel"
-            android:layout_marginTop="2dp"
-            android:background="@drawable/track_main_background"
-            android:elevation="4dp"
-            app:tabIndicatorAnimationDuration="2"
-            app:tabIndicatorColor="@color/top_panel_background_color_end"
-            app:tabIndicatorFullWidth="false"
-            app:tabMode="auto"
-            app:tabRippleColor="@color/top_panel_background_color_end"
-            app:tabSelectedTextColor="?android:textColor"
-            app:tabTextColor="?colorOnSecondary"
-            tools:ignore="SpeakableTextPresentCheck" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/music_name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toStartOf="@id/music_timer"
+                            app:layout_constraintStart_toEndOf="@id/cover_music"
+                            app:layout_constraintTop_toTopOf="@id/cover_music"
+                            tools:text="@string/app_name" />
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager"
-            android:layout_width="match_parent"
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/artist_name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:textSize="12sp"
+                            android:textStyle="normal"
+                            app:layout_constraintBottom_toBottomOf="@id/cover_music"
+                            app:layout_constraintEnd_toStartOf="@id/music_timer"
+                            app:layout_constraintStart_toEndOf="@id/cover_music"
+                            tools:text="@string/app_name" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/closeMusic"
+                            android:layout_width="@dimen/icon_size_default"
+                            android:layout_height="@dimen/icon_size_default"
+                            android:layout_marginEnd="@dimen/margin_standard"
+                            android:clickable="true"
+                            android:foreground="?selectableItemBackgroundBorderless"
+                            android:src="@drawable/ic_close"
+                            app:layout_constraintBottom_toBottomOf="@id/cover_music"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/cover_music"
+                            app:tint="?colorSecondary" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/next_music"
+                            android:layout_width="@dimen/icon_size_small"
+                            android:layout_height="@dimen/icon_size_small"
+                            android:layout_marginEnd="10dp"
+                            android:clickable="true"
+                            android:foreground="?selectableItemBackgroundBorderless"
+                            android:src="@drawable/ic_skip_next"
+                            app:layout_constraintBottom_toBottomOf="@id/closeMusic"
+                            app:layout_constraintEnd_toStartOf="@id/closeMusic"
+                            app:layout_constraintTop_toTopOf="@id/closeMusic"
+                            app:tint="?colorSecondary" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/play_pause_music"
+                            android:layout_width="@dimen/icon_size_default"
+                            android:layout_height="@dimen/icon_size_default"
+                            android:layout_marginEnd="10dp"
+                            android:clickable="true"
+                            android:foreground="?selectableItemBackgroundBorderless"
+                            app:layout_constraintBottom_toBottomOf="@id/closeMusic"
+                            app:layout_constraintEnd_toStartOf="@id/next_music"
+                            app:layout_constraintTop_toTopOf="@id/closeMusic"
+                            app:tint="?colorSecondary"
+                            tools:src="@drawable/ic_play_circle_filled" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/skip_previous_music"
+                            android:layout_width="@dimen/icon_size_small"
+                            android:layout_height="@dimen/icon_size_small"
+                            android:layout_marginEnd="10dp"
+                            android:clickable="true"
+                            android:foreground="?selectableItemBackgroundBorderless"
+                            android:src="@drawable/ic_skip_previous"
+                            app:layout_constraintBottom_toBottomOf="@id/closeMusic"
+                            app:layout_constraintEnd_toStartOf="@id/play_pause_music"
+                            app:layout_constraintTop_toTopOf="@id/closeMusic"
+                            app:tint="?colorSecondary" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/music_timer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:maxLines="1"
+                            android:textColor="?colorSecondary"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@id/cover_music"
+                            app:layout_constraintEnd_toStartOf="@id/skip_previous_music"
+                            app:layout_constraintTop_toTopOf="@id/cover_music"
+                            tools:text="00:00/00:00" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:id="@+id/group_divider"
+                        android:layout_width="0dp"
+                        android:layout_height="0.3dp"
+                        app:dividerColor="?colorPrimary"
+                        app:layout_constraintBottom_toTopOf="@id/tabLayout"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigation_drawer"
+            android:layout_width="280dp"
             android:layout_height="match_parent"
-            android:layout_below="@id/tabLayout"
-            android:layout_above="@id/viewStub"
-            android:background="?colorPrimary" />
+            android:layout_gravity="start"
+            android:background="?colorPrimary"
+            android:clipToPadding="true"
+            app:headerLayout="@layout/navigation_drawer_header_layout"
+            app:itemIconPadding="@dimen/padding_standard"
+            app:itemIconSize="@dimen/icon_size_default"
+            app:itemIconTint="?iconTint"
+            app:itemRippleColor="?colorSecondary"
+            app:itemTextColor="?android:textColor"
+            app:menu="@menu/navigation_drawer_menu" />
 
-        <ViewStub
-            android:id="@+id/viewStub"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:elevation="8dp"
-            android:inflatedId="@+id/inflatedView"
-            android:layout="@layout/music_player_ui" />
+    </androidx.drawerlayout.widget.DrawerLayout>
 
-    </RelativeLayout>
 </layout>

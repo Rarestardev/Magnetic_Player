@@ -1,71 +1,81 @@
-# Magnetic Player 🎵
+<img src="a stylish banner for.png" width="1024" height="512" />
 
-Magnetic Player is a powerful and feature-rich music player developed using Java for Android. Designed with the modern user in mind, this application offers a seamless and engaging music playback experience, incorporating advanced technologies and a clean MVVM architecture to ensure scalability and maintainability.
+# 🎵 Mg Player
+
+**Mg Player** is a powerful and modern music player built in **Java for Android**, designed to deliver a smooth, expressive, and customizable listening experience. With a clean **MVVM architecture**, advanced audio features, and a redesigned UI, it’s built for users who care about both performance and aesthetics.
 
 ---
 
 ## 🔧 Technologies and Libraries Used
 
-Magnetic Player is built with the following technologies and libraries:
+Mg Player is developed using robust and scalable tools:
 
-- Glide: For efficient image loading and caching.
-- Room: A robust local database solution for Android.
-- RxJava: For handling asynchronous operations and reactive programming.
-- Equalizer View: A customizable equalizer interface for enhanced user interaction.
-- Media: Comprehensive management for media playback.
-- Palette: For extracting dominant colors from album covers to enhance UI aesthetics.
+- **Glide** – Efficient image loading and caching
+- **Room** – Local database for persistent music data
+- **RxJava** – Reactive programming for smooth async operations
+- **Equalizer View** – Customizable equalizer interface
+- **Media** – Comprehensive media playback management
+- **Blurry** – Creating a blur image
+- **Palette** – Color extraction from album covers for UI enhancement (v2.0.1 not used)
 
 ---
 
 ## 🌟 Key Features
 
-Magnetic Player offers a wide range of features designed to elevate the music listening experience:
+Mg Player offers a wide range of features to elevate your music experience:
 
-- Notification Control: Manage music playback directly from the status bar and lock screen.
-- Organization Options: Sort and organize music by artist, album, folders, and more.
-- Favorites and Playlists: Easily create and manage favorites and playlists.
-- Most Played: View songs that have been played the most.
-- Dynamic Animations: Enjoy visually engaging animations for a modern feel.
-- Foreground Playback: Continue playing music seamlessly in the foreground.
-- Dark and Light Themes: Personalize the app’s appearance to suit your preference.
-- Search Functionality: Quickly find songs or artists with the built-in search feature.
-- Queue Management: Organize and modify your playback queue with ease.
-- Shuffle and Repeat Modes: Enjoy music randomly or on repeat, as you wish.
-- Custom Seek Bar: Control playback with a stylish and customized seek bar.
+- 🔄 Rotating Circular Cover Animation
+- 📂 Smart Categorization by Artist, Album, Folder, and Genre
+- 🔍 Fast Search
+- ❤️ Favorites & Playlists
+- 🔢 Most Played Tracking
+- 🎚️ Advanced Equalizer
+- 🌗 Light & Dark Themes + Color Variants
+- 🌀 Animation Settings
+- 📱 Redesigned Playback Screen
+- 🔒 Lock Screen & Status Bar Controls
+- 🔁 Shuffle & Repeat Modes
+- 📈 Queue Management
+- ▶️ Foreground Playback
+- 🎛️ Custom Seek Bar
+- 🇮🇷 Persian Language Support
+- 🛠️ Bug Fixes & Performance Improvements
+
+> 🧾 *Note: Dynamic background color matching has been removed in this version for better performance and clarity.*
 
 ---
 
 ## 🚀 Upcoming Features
 
-Here are some features planned for future updates:
+Planned enhancements for future releases:
 
-- Lyrics synchronization and display.
-- Support for additional audio formats.
-- Widgets for home screen playback controls.
-- Cloud synchronization for playlists and favorites.
-- Powerful equalizer
-- Different themes
-
+- 🎤 Lyrics synchronization and display
+- 📦 Support for additional audio formats
+- 🧩 Home screen widgets
+- ☁️ Cloud sync for playlists and favorites
+- 🔊 Audio effects and DSP enhancements
+- 🌈 Theme customization with user presets
 
 ---
 
 ## 👨‍💻 About the Developer
 
-Magnetic Player is proudly developed by [Ratestar](https://github.com/Rarestardev), a passionate developer dedicated to creating intuitive and user-friendly applications that enhance everyday experiences
+Mg Player is proudly developed by **[Rarestar.dev](https://github.com/Rarestardev)**, a passionate Android developer focused on creating intuitive, visually expressive, and user-driven applications.
 
 ---
 
-### 📣 Feedback and Contribution
+### 📣 Feedback & Contribution
 
-We welcome your feedback and suggestions to improve Magnetic Player. If you'd like to contribute to the project, feel free to fork the repository and submit a pull request. Thank you for supporting Magnetic Player!
+We welcome your feedback and contributions!  
+Feel free to fork the repository, submit pull requests, or open issues to help improve Mg Player.
 
 ---
 
-## Connect with Me
+## 📱 Connect with Me
 
 - [Instagram](https://www.instagram.com/rarestar.dev)
 - [Telegram](https://t.me/Rarestar_dev)
 
 ---
 
-Stay tuned for more updates and enjoy your music with Magnetic Player! 🎶
+🎶 *Stay tuned for more updates and enjoy your music with Mg Player!*

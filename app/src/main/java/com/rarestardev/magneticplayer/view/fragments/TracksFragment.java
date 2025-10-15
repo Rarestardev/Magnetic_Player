@@ -1,7 +1,6 @@
 package com.rarestardev.magneticplayer.view.fragments;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.AppCompatTextView;
@@ -18,17 +17,17 @@ import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
 import com.rarestardev.magneticplayer.R;
-import com.rarestardev.magneticplayer.adapter.MusicFileAdapter;
+import com.rarestardev.magneticplayer.helper.PlayMusicWithEqualizer;
+import com.rarestardev.magneticplayer.music_utils.music.adapters.MusicFileAdapter;
 import com.rarestardev.magneticplayer.application.MusicApplication;
-import com.rarestardev.magneticplayer.controller.MusicPlaybackSettings;
-import com.rarestardev.magneticplayer.controller.MusicPlayerService;
-import com.rarestardev.magneticplayer.enums.ExtraKey;
+import com.rarestardev.magneticplayer.music_utils.music.MusicPlaybackSettings;
+import com.rarestardev.magneticplayer.enums.ShuffleMode;
 import com.rarestardev.magneticplayer.model.MusicFile;
-import com.rarestardev.magneticplayer.settings.SortListSettings;
+import com.rarestardev.magneticplayer.settings.storage.CoverAnimationSettingsStorage;
+import com.rarestardev.magneticplayer.settings.storage.SortListSettings;
 import com.rarestardev.magneticplayer.utilities.EndOfListMarginDecorator;
 import com.rarestardev.magneticplayer.viewmodel.MusicStatusViewModel;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
@@ -39,11 +38,10 @@ public class TracksFragment extends BaseFragment {
     private RecyclerView trackListRecyclerView;
     private AppCompatTextView not_find_tracks;
     private ProgressBar progress_circular;
-
-    private MusicApplication application;
     private SortListSettings sortListSettings;
     private MusicPlaybackSettings musicPlaybackSettings;
     private MusicFileAdapter adapter;
+    private MusicStatusViewModel musicStatusViewModel;
 
     public TracksFragment() {
         // Required empty public constructor
@@ -61,7 +59,9 @@ public class TracksFragment extends BaseFragment {
         progress_circular = view.findViewById(R.id.progress_circular);
         progress_circular.setVisibility(View.VISIBLE);
 
-        application = (MusicApplication) getActivity().getApplication();
+        MusicApplication application = (MusicApplication) getActivity().getApplication();
+        musicStatusViewModel = application.getMusicViewModel();
+
         sortListSettings = new SortListSettings(getContext());
         musicPlaybackSettings = new MusicPlaybackSettings(getContext());
 
@@ -74,6 +74,10 @@ public class TracksFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         trackListRecyclerView.refreshDrawableState();
+        CoverAnimationSettingsStorage storage = new CoverAnimationSettingsStorage(getContext());
+        adapter.setRotateAnimationActive(storage.getEnabledAnimation());
+
+        musicStatusViewModel.getCurrentPosition().observe(getViewLifecycleOwner(), integer -> trackListRecyclerView.scrollToPosition(integer + 1));
     }
 
     @Override
@@ -81,9 +85,9 @@ public class TracksFragment extends BaseFragment {
         trackListRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         trackListRecyclerView.addItemDecoration(new EndOfListMarginDecorator());
 
-        if (musicFiles != null || !musicFiles.isEmpty()){
+        if (musicFiles != null || !musicFiles.isEmpty()) {
             setSortOrderOnList(musicFiles);
-            switch (sortListSettings.getPrefSortView()){
+            switch (sortListSettings.getPrefSortView()) {
                 case "NEWEST":
                     Comparator<MusicFile> comparator = Comparator.comparingLong(MusicFile::getDateAdded);
                     musicFiles.sort(comparator.reversed()); // newest
@@ -102,28 +106,25 @@ public class TracksFragment extends BaseFragment {
             not_find_tracks.setVisibility(View.GONE);
             progress_circular.setVisibility(View.GONE);
 
+            shuffle_play.setEnabled(!musicFiles.isEmpty());
+
             shuffle_play.setOnClickListener(v -> {
                 Random random = new Random();
+
                 int index = random.nextInt(musicFiles.size());
-                Intent service = new Intent(getContext(), MusicPlayerService.class);
-                service.putParcelableArrayListExtra(ExtraKey.MUSIC_LIST.getValue(), new ArrayList<>(musicFiles));
-                service.putExtra(ExtraKey.MUSIC_LIST_POSITION.getValue(), index);
-                getContext().startService(service);
-                if (!musicPlaybackSettings.getIsShuffle()){
-                    musicPlaybackSettings.setIsShuffle(true);
-                }
-                Toast.makeText(getContext(), "Shuffle play started...", Toast.LENGTH_SHORT).show();
+                new PlayMusicWithEqualizer(getContext()).startMusicService(musicFiles, index, true);
+
+                musicPlaybackSettings.setShuffleMode(ShuffleMode.SHUFFLE);
+                Toast.makeText(getContext(), R.string.shuffle_play_started, Toast.LENGTH_SHORT).show();
             });
 
-        }else {
+        } else {
             trackListRecyclerView.setVisibility(View.GONE);
             not_find_tracks.setVisibility(View.VISIBLE);
             progress_circular.setVisibility(View.GONE);
         }
 
-        MusicStatusViewModel musicStatusViewModel = application.getMusicViewModel();
-        musicStatusViewModel.getFilePath().observe(getViewLifecycleOwner(), adapter::getMusicIsPlaying);
-        musicStatusViewModel.getCurrentPosition().observe(getViewLifecycleOwner(), integer -> trackListRecyclerView.scrollToPosition(integer + 2));
+        adapter.setMusicStatusViewModel(musicStatusViewModel);
     }
 
     @SuppressLint("NotifyDataSetChanged")

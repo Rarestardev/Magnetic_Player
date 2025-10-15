@@ -1,8 +1,6 @@
 package com.rarestardev.magneticplayer.custom_views;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -15,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,7 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.rarestardev.magneticplayer.R;
 import com.rarestardev.magneticplayer.adapter.PlaylistAdapter;
 import com.rarestardev.magneticplayer.application.MusicApplication;
-import com.rarestardev.magneticplayer.entities.PlaylistEntity;
+import com.rarestardev.magneticplayer.database.entities.PlaylistEntity;
 import com.rarestardev.magneticplayer.model.MusicFile;
 import com.rarestardev.magneticplayer.utilities.Constants;
 import com.rarestardev.magneticplayer.viewmodel.PlayListViewModel;
@@ -70,7 +67,7 @@ public class PlaylistDialogFragment extends DialogFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(STYLE_NORMAL,R.style.TransparentDialogFragment);
+//        setStyle(STYLE_NORMAL,R.style.TransparentDialogFragment);
         if (getArguments() != null) {
             musicFiles = getArguments().getParcelableArrayList(ARG_LIST_NAME);
             list_position = getArguments().getInt(ARG_LIST_INDEX);
@@ -105,7 +102,7 @@ public class PlaylistDialogFragment extends DialogFragment {
                 adapter.setListener((playlist_name, id) -> {
                     boolean music = viewModel.checkMusicInPlaylist(playlist_name, musicFile);
                     if (music) {
-                        Toast.makeText(getContext(), "Music in Playlist", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), R.string.this_music_is_available_in_the_playlist, Toast.LENGTH_SHORT).show();
                     } else {
                         Log.e(Constants.appLog, "checkMusicInPlaylist is null on playlist dialog");
                         viewModel.addedMusicIntoPlaylist(musicFile, playlist_name);
@@ -156,7 +153,7 @@ public class PlaylistDialogFragment extends DialogFragment {
                     save_playlist.setOnClickListener(v -> {
                         if (query.isEmpty()) {
                             Toast.makeText(getContext(),
-                                            "Please type your playlist name!",
+                                            R.string.please_type_your_playlist_name,
                                             Toast.LENGTH_SHORT)
                                     .show();
                         } else {
@@ -166,7 +163,7 @@ public class PlaylistDialogFragment extends DialogFragment {
 
                             viewModel.insertPlaylist(playlist)
                                     .subscribe(() -> {
-                                                Toast.makeText(getContext(), "Saved new playlist", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getContext(), getString(R.string.saved_new_playlist), Toast.LENGTH_SHORT).show();
                                                 loadPlaylist();
                                             },
                                             throwable ->

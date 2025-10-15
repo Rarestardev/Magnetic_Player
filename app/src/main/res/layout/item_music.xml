@@ -1,85 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:layout_marginBottom="5dp"
-    app:cardBackgroundColor="?colorAccent"
-    app:cardCornerRadius="6dp">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="6dp"
+    android:elevation="4dp"
+    android:background="@android:color/transparent"
+    android:foreground="?selectableItemBackgroundBorderless"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        >
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/albumArt"
-            android:layout_width="50dp"
-            android:layout_height="0dp"
-            android:elevation="6dp"
+            android:layout_width="@dimen/icon_size_extra_large"
+            android:layout_height="@dimen/icon_size_extra_large"
+            android:elevation="12dp"
             android:scaleType="fitXY"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="12dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:riv_mutate_background="true"
+            app:riv_corner_radius="8dp"
             tools:src="@drawable/ic_music" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvFileName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="80dp"
             android:layout_marginTop="6dp"
             android:layout_marginEnd="8dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@id/is_playing_music"
-            app:layout_constraintStart_toEndOf="@id/albumArt"
-            app:layout_constraintTop_toTopOf="@id/albumArt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Music" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvAlbumName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="80dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="4dp"
+            android:layout_marginBottom="6dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@id/albumArt"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/is_playing_music"
-            app:layout_constraintStart_toEndOf="@id/albumArt"
+            app:layout_constraintStart_toStartOf="parent"
             tools:text="@string/app_name" />
 
         <eu.gsottbauer.equalizerview.EqualizerView
             android:id="@+id/is_playing_music"
             android:layout_width="@dimen/icon_size_default"
-            android:layout_height="0dp"
+            android:layout_height="@dimen/icon_size_default"
             android:layout_marginEnd="@dimen/margin_standard"
             android:visibility="visible"
             app:animationDuration="3500"
-            app:barColor="@color/top_panel_background_color_start"
+            app:barColor="?colorSecondary"
             app:barCount="4"
-            app:layout_constraintBottom_toBottomOf="@id/option_menu"
-            app:layout_constraintEnd_toStartOf="@id/option_menu"
-            app:layout_constraintTop_toTopOf="@id/option_menu"
-            app:runInBatterySaveMode="true" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/option_menu"
-            android:layout_width="@dimen/icon_size_default"
-            android:layout_height="@dimen/icon_size_default"
-            android:layout_marginEnd="10dp"
-            android:foreground="?selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_more"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
+            app:layout_constraintTop_toTopOf="parent"
+            app:runInBatterySaveMode="true" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.cardview.widget.CardView>
+
+
+</com.google.android.material.card.MaterialCardView>

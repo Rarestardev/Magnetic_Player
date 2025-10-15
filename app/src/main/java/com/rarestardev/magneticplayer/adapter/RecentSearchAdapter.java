@@ -9,7 +9,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.rarestardev.magneticplayer.R;
-import com.rarestardev.magneticplayer.entities.SearchEntity;
+import com.rarestardev.magneticplayer.database.entities.SearchEntity;
 
 import java.util.List;
 

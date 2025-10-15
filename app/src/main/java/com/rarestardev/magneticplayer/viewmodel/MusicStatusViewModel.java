@@ -15,7 +15,9 @@ public class MusicStatusViewModel extends ViewModel {
     private final MutableLiveData<Integer> currentDurationMusic;
     private final MutableLiveData<List<MusicFile>> musicFiles;
     private final MutableLiveData<Integer> currentPosition;
+    private final MutableLiveData<Long> currentMillisTimer;
     private final MutableLiveData<String> FilePath;
+    private final MutableLiveData<Integer> audioSessionIdLive;
 
     public MusicStatusViewModel() {
         musicInfo = new MutableLiveData<>();
@@ -24,7 +26,26 @@ public class MusicStatusViewModel extends ViewModel {
         musicFiles = new MutableLiveData<>();
         currentPosition = new MutableLiveData<>();
         FilePath = new MutableLiveData<>();
+        audioSessionIdLive = new MutableLiveData<>();
+        currentMillisTimer = new MutableLiveData<>();
     }
+
+    public LiveData<Integer> getAudioSessionIdLive() {
+        return audioSessionIdLive;
+    }
+
+    public void setAudioSessionId(int sessionId) {
+        audioSessionIdLive.setValue(sessionId);
+    }
+
+    public void setTimerMillis(long millis){
+        currentMillisTimer.setValue(millis);
+    }
+
+    public LiveData<Long> getTimerMillis(){
+        return currentMillisTimer;
+    }
+
 
     public LiveData<MusicFile> getMusicInfo() {
         return musicInfo;

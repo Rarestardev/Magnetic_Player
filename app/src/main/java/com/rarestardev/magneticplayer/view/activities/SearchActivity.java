@@ -8,7 +8,6 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -16,18 +15,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.rarestardev.magneticplayer.R;
-import com.rarestardev.magneticplayer.adapter.MusicFileAdapter;
+import com.rarestardev.magneticplayer.music_utils.music.adapters.MusicFileAdapter;
 import com.rarestardev.magneticplayer.adapter.RecentSearchAdapter;
 import com.rarestardev.magneticplayer.application.MusicApplication;
 import com.rarestardev.magneticplayer.databinding.ActivitySearchBinding;
-import com.rarestardev.magneticplayer.entities.SearchEntity;
+import com.rarestardev.magneticplayer.database.entities.SearchEntity;
 import com.rarestardev.magneticplayer.utilities.AdNetworkManager;
 import com.rarestardev.magneticplayer.utilities.EndOfListMarginDecorator;
-import com.rarestardev.magneticplayer.utilities.NavigationBarUtils;
 import com.rarestardev.magneticplayer.viewmodel.MusicStatusViewModel;
 import com.rarestardev.magneticplayer.viewmodel.SearchMusicViewModel;
 
-public class SearchActivity extends AppCompatActivity implements RecentSearchAdapter.OnRecentClickListener {
+public class SearchActivity extends BaseActivity implements RecentSearchAdapter.OnRecentClickListener {
 
     private ActivitySearchBinding binding;
     private SearchMusicViewModel searchMusicViewModel;
@@ -42,16 +40,18 @@ public class SearchActivity extends AppCompatActivity implements RecentSearchAda
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_search);
 
+        MusicApplication application = (MusicApplication) getApplication();
+        MusicStatusViewModel musicStatusViewModel = application.getMusicViewModel();
+
         binding.recyclerViewRecent.setLayoutManager(new GridLayoutManager(this, 4));
 
         adapter = new MusicFileAdapter(SearchActivity.this);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.addItemDecoration(new EndOfListMarginDecorator());
         binding.recyclerView.setHasFixedSize(true);
+        adapter.setMusicStatusViewModel(musicStatusViewModel);
 
         searchMusicViewModel = new ViewModelProvider(this).get(SearchMusicViewModel.class);
-
-        NavigationBarUtils.setNavigationBarColor(this,0);
 
         doInitialization();
         showRecentSearch();
@@ -61,7 +61,7 @@ public class SearchActivity extends AppCompatActivity implements RecentSearchAda
     protected void onStart() {
         super.onStart();
         binding.noResult.setVisibility(View.VISIBLE);
-        binding.setNoResultText("Type a word for search music...");
+        binding.setNoResultText(getString(R.string.type_a_word_for_search_music));
         binding.recyclerView.setVisibility(View.GONE);
         binding.result.setVisibility(View.GONE);
 
@@ -119,8 +119,7 @@ public class SearchActivity extends AppCompatActivity implements RecentSearchAda
 
                 MusicApplication application = (MusicApplication) getApplication();
                 MusicStatusViewModel musicStatusViewModel = application.getMusicViewModel();
-
-                musicStatusViewModel.getFilePath().observe(this, s -> adapter.getMusicIsPlaying(s));
+                adapter.setMusicStatusViewModel(musicStatusViewModel);
             }
         });
     }
@@ -156,15 +155,15 @@ public class SearchActivity extends AppCompatActivity implements RecentSearchAda
             MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(SearchActivity.this, R.style.Theme_CustomThemeAlertDialog)
                     .setIcon(R.drawable.ic_warning)
                     .setCancelable(false)
-                    .setTitle("Warning !")
-                    .setMessage("Are you sure for delete all history ?")
+                    .setTitle(R.string.warning)
+                    .setMessage(R.string.are_you_sure_for_delete_all_history)
                     .setBackground(getDrawable(R.drawable.custom_alert_dialog))
-                    .setPositiveButton("Yes", (dialog, which) -> {
+                    .setPositiveButton(R.string.yes, (dialog, which) -> {
                         searchMusicViewModel.deleteAllRecentSearch();
                         dialog.dismiss();
                         binding.editTextSearch.setText("");
                     })
-                    .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
+                    .setNegativeButton(R.string.cancel, (dialog, which) -> dialog.dismiss());
 
             builder.show();
         });

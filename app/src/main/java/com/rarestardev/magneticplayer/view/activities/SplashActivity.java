@@ -12,18 +12,16 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.rarestardev.magneticplayer.R;
-import com.rarestardev.magneticplayer.settings.ThemeSettings;
+import com.rarestardev.magneticplayer.settings.storage.ThemesStorage;
 import com.rarestardev.magneticplayer.utilities.Constants;
-import com.rarestardev.magneticplayer.utilities.NavigationBarUtils;
 
 
 @SuppressLint("CustomSplashScreen")
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends BaseActivity {
 
     private static final int PERMISSION_REQUEST_CODE = 1000;
 
@@ -33,16 +31,14 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-        ThemeSettings themeSettings = new ThemeSettings(this);
-        themeSettings.doInitialization();
-
-        NavigationBarUtils.setNavigationBarColor(this, getColor(R.color.top_panel_background_color_end));
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+
+        ThemesStorage storage = new ThemesStorage(this);
+        storage.doInitializationTheme();
 
         checkAndRequestPermissions();
     }
@@ -115,6 +111,6 @@ public class SplashActivity extends AppCompatActivity {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
-        }, 3000);
+        }, 2000);
     }
 }

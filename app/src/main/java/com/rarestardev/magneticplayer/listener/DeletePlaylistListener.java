@@ -2,7 +2,7 @@ package com.rarestardev.magneticplayer.listener;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.rarestardev.magneticplayer.entities.PlaylistEntity;
+import com.rarestardev.magneticplayer.database.entities.PlaylistEntity;
 
 public interface DeletePlaylistListener {
 

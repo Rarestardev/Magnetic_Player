@@ -36,6 +36,7 @@ public class MusicFileAdapterHelper {
 
     private final Context context;
     private final FavoriteMusicViewModel favoriteMusicViewModel;
+    private static final int[] FAVORITE = {R.string.remove_on_favorite, R.string.add_to_favorite};
 
     public MusicFileAdapterHelper(Context context) {
         this.context = context;
@@ -79,7 +80,7 @@ public class MusicFileAdapterHelper {
             if (s != null) {
                 if (s.equals(musicFile.getFilePath())) {
                     favoriteIcon.setImageResource(R.drawable.ic_favorite);
-                    favoriteTextView.setText("Remove on favorite");
+                    favoriteTextView.setText(context.getString(FAVORITE[0]));
 
                     favoriteLayout.setOnClickListener(v -> {
                         favoriteMusicViewModel.deleteFavoriteMusic(musicFile);
@@ -88,7 +89,7 @@ public class MusicFileAdapterHelper {
 
                 } else {
                     favoriteIcon.setImageResource(R.drawable.ic_favorite_border);
-                    favoriteTextView.setText("Add to favorite");
+                    favoriteTextView.setText(context.getString(FAVORITE[1]));
 
                     favoriteLayout.setOnClickListener(v -> {
                         favoriteMusicViewModel.insertFavoriteData(musicFile);
@@ -98,7 +99,7 @@ public class MusicFileAdapterHelper {
 
             } else {
                 favoriteIcon.setImageResource(R.drawable.ic_favorite_border);
-                favoriteTextView.setText("Add to favorite");
+                favoriteTextView.setText(context.getString(FAVORITE[1]));
                 favoriteLayout.setOnClickListener(v -> {
                     favoriteMusicViewModel.insertFavoriteData(musicFile);
                     dialog.dismiss();

@@ -24,6 +24,9 @@ public class MusicFile implements Parcelable {
     @ColumnInfo(name = "albumName")
     private String albumName;
 
+    @ColumnInfo(name = "music_genre")
+    private String musicGenre;
+
     @ColumnInfo(name = "duration")
     private long duration;
 
@@ -37,11 +40,12 @@ public class MusicFile implements Parcelable {
     private long dateAdded;
 
     @Ignore
-    public MusicFile(int musicFileId ,String filePath, String artistName, String albumName, long duration, String albumArtUri, String songTitle, long dateAdded) {
+    public MusicFile(int musicFileId ,String filePath, String artistName, String albumName,String musicGenre, long duration, String albumArtUri, String songTitle, long dateAdded) {
         this.musicFileId = musicFileId;
         this.filePath = filePath;
         this.artistName = artistName;
         this.albumName = albumName;
+        this.musicGenre = musicGenre;
         this.duration = duration;
         this.albumArtUri = albumArtUri;
         this.songTitle = songTitle;
@@ -57,6 +61,7 @@ public class MusicFile implements Parcelable {
         filePath = in.readString();
         artistName = in.readString();
         albumName = in.readString();
+        musicGenre = in.readString();
         duration = in.readLong();
         albumArtUri = in.readString();
         songTitle = in.readString();
@@ -64,7 +69,7 @@ public class MusicFile implements Parcelable {
     }
 
     @Ignore
-    public static final Creator<MusicFile> CREATOR = new Creator<MusicFile>() {
+    public static final Creator<MusicFile> CREATOR = new Creator<>() {
         @Override
         public MusicFile createFromParcel(Parcel in) {
             return new MusicFile(in);
@@ -89,6 +94,7 @@ public class MusicFile implements Parcelable {
         dest.writeString(filePath);
         dest.writeString(artistName);
         dest.writeString(albumName);
+        dest.writeString(musicGenre);
         dest.writeLong(duration);
         dest.writeString(albumArtUri);
         dest.writeString(songTitle);
@@ -113,6 +119,14 @@ public class MusicFile implements Parcelable {
 
     public String getAlbumName() {
         return albumName;
+    }
+
+    public String getMusicGenre() {
+        return musicGenre;
+    }
+
+    public void setMusicGenre(String musicGenre) {
+        this.musicGenre = musicGenre;
     }
 
     public long getDuration() {

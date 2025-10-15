@@ -1,5 +1,6 @@
 package com.rarestardev.magneticplayer.model;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -14,13 +15,16 @@ public class RecentList {
     @Embedded(prefix = "musicFiles_")
     private MusicFile musicFiles;
 
+    @ColumnInfo(name = "playCount")
+    private long playCount;
+
     public RecentList() {
     }
 
-
     @Ignore
-    public RecentList(MusicFile musicFiles) {
+    public RecentList(MusicFile musicFiles, long playCount) {
         this.musicFiles = musicFiles;
+        this.playCount = playCount;
     }
 
     public int getId() {
@@ -37,5 +41,13 @@ public class RecentList {
 
     public void setMusicFiles(MusicFile musicFiles) {
         this.musicFiles = musicFiles;
+    }
+
+    public long getPlayCount() {
+        return playCount;
+    }
+
+    public void setPlayCount(long playCount) {
+        this.playCount = playCount;
     }
 }

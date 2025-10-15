@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.rarestardev.magneticplayer.R;
-import com.rarestardev.magneticplayer.entities.PlaylistEntity;
+import com.rarestardev.magneticplayer.database.entities.PlaylistEntity;
 import com.rarestardev.magneticplayer.listener.DeletePlaylistListener;
 
 import java.util.List;

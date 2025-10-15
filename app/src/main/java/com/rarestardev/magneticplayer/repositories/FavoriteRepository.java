@@ -4,9 +4,9 @@ import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 
-import com.rarestardev.magneticplayer.dao.FavoriteDao;
-import com.rarestardev.magneticplayer.database.AppDatabase;
-import com.rarestardev.magneticplayer.database.DatabaseClient;
+import com.rarestardev.magneticplayer.database.dao.FavoriteDao;
+import com.rarestardev.magneticplayer.database.db.AppDatabase;
+import com.rarestardev.magneticplayer.database.db.DatabaseClient;
 import com.rarestardev.magneticplayer.model.MusicFile;
 
 import java.util.ArrayList;

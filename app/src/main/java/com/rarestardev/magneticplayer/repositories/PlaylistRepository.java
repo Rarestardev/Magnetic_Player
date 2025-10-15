@@ -3,12 +3,12 @@ package com.rarestardev.magneticplayer.repositories;
 import android.content.Context;
 import android.util.Log;
 
-import com.rarestardev.magneticplayer.dao.MusicPlaylistDao;
-import com.rarestardev.magneticplayer.dao.PlaylistDao;
-import com.rarestardev.magneticplayer.database.AppDatabase;
-import com.rarestardev.magneticplayer.database.DatabaseClient;
-import com.rarestardev.magneticplayer.entities.MusicOnPlayListEntity;
-import com.rarestardev.magneticplayer.entities.PlaylistEntity;
+import com.rarestardev.magneticplayer.database.dao.MusicPlaylistDao;
+import com.rarestardev.magneticplayer.database.dao.PlaylistDao;
+import com.rarestardev.magneticplayer.database.db.AppDatabase;
+import com.rarestardev.magneticplayer.database.db.DatabaseClient;
+import com.rarestardev.magneticplayer.database.entities.MusicOnPlayListEntity;
+import com.rarestardev.magneticplayer.database.entities.PlaylistEntity;
 import com.rarestardev.magneticplayer.model.MusicFile;
 import com.rarestardev.magneticplayer.utilities.Constants;
 

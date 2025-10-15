@@ -1,48 +1,50 @@
 package com.rarestardev.magneticplayer.view.fragments;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
+import android.app.Dialog;
+import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatTextView;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.adivery.sdk.AdiveryBannerAdView;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.rarestardev.magneticplayer.R;
 import com.rarestardev.magneticplayer.adapter.FavoriteMusicAdapter;
 import com.rarestardev.magneticplayer.adapter.PlaylistWithMusicAdapter;
 import com.rarestardev.magneticplayer.application.MusicApplication;
-import com.rarestardev.magneticplayer.controller.MusicPlayerService;
-import com.rarestardev.magneticplayer.entities.PlaylistEntity;
-import com.rarestardev.magneticplayer.enums.ExtraKey;
+import com.rarestardev.magneticplayer.helper.PlayMusicWithEqualizer;
+import com.rarestardev.magneticplayer.database.entities.PlaylistEntity;
 import com.rarestardev.magneticplayer.listener.DeletePlaylistListener;
 import com.rarestardev.magneticplayer.model.MusicFile;
 import com.rarestardev.magneticplayer.utilities.AdNetworkManager;
 import com.rarestardev.magneticplayer.utilities.Constants;
+import com.rarestardev.magneticplayer.utilities.EndOfListMarginDecorator;
 import com.rarestardev.magneticplayer.viewmodel.MusicStatusViewModel;
 import com.rarestardev.magneticplayer.viewmodel.PlayListViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class PlaylistFragment extends Fragment {
+public class PlaylistFragment extends BaseFragment {
 
     private PlaylistWithMusicAdapter adapter;
     private PlayListViewModel viewModel;
-
     private RecyclerView playlistRecyclerView;
     private AppCompatTextView noPlaylist;
     private AdiveryBannerAdView adsBannerLayoutPlaylistFragment;
+    private MaterialButton btn_add_playlist;
 
     @SuppressLint("NotifyDataSetChanged")
     @Override
@@ -53,11 +55,13 @@ public class PlaylistFragment extends Fragment {
 
         playlistRecyclerView = view.findViewById(R.id.playlistRecyclerView);
         noPlaylist = view.findViewById(R.id.noPlaylist);
+        btn_add_playlist = view.findViewById(R.id.btn_add_playlist);
 
         viewModel = new ViewModelProvider(this).get(PlayListViewModel.class);
 
         playlistRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         playlistRecyclerView.setHasFixedSize(true);
+        playlistRecyclerView.addItemDecoration(new EndOfListMarginDecorator());
 
         adapter = new PlaylistWithMusicAdapter(getContext());
 
@@ -77,7 +81,55 @@ public class PlaylistFragment extends Fragment {
             }
         });
         adsBannerLayoutPlaylistFragment = view.findViewById(R.id.banner_ad);
+
+        addedNewPlaylist();
+
         return view;
+    }
+
+    @SuppressLint("CheckResult")
+    private void addedNewPlaylist() {
+        btn_add_playlist.setOnClickListener(v -> {
+            Dialog dialog = new Dialog(getContext());
+            dialog.setContentView(R.layout.added_playlist_layout);
+            dialog.setCancelable(true);
+            dialog.getWindow().setGravity(Gravity.CENTER);
+            dialog.getWindow().getDecorView().setBackgroundColor(Color.TRANSPARENT);
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            dialog.show();
+
+            AppCompatEditText add_playlist_edittext = dialog.findViewById(R.id.add_playlist_edittext);
+            MaterialButton btn_save_new_playlist = dialog.findViewById(R.id.btn_save_new_playlist);
+
+            add_playlist_edittext.setFocusable(true);
+
+            btn_save_new_playlist.setOnClickListener(v1 -> {
+                String name = add_playlist_edittext.getText().toString();
+                if (!name.isEmpty()) {
+                    PlaylistEntity playlist = new PlaylistEntity();
+                    playlist.setPlaylistName(name);
+                    playlist.setCurrent_date(System.currentTimeMillis());
+
+                    viewModel.insertPlaylist(playlist)
+                            .subscribe(() -> {
+                                        Toast.makeText(getContext(), getString(R.string.saved_new_playlist), Toast.LENGTH_SHORT).show();
+                                        loadPlaylist();
+                                    },
+                                    throwable ->
+                                            Log.e(Constants.appLog, "Error to save new playlist"));
+
+                } else {
+                    add_playlist_edittext.getText().clear();
+                }
+                dialog.dismiss();
+                add_playlist_edittext.setFocusable(false);
+            });
+
+        });
+    }
+
+    private void loadPlaylist() {
+        viewModel.loadPlaylist();
     }
 
     private void getAllMusicWithPlaylist() {
@@ -90,16 +142,16 @@ public class PlaylistFragment extends Fragment {
                             .setIcon(R.drawable.ic_warning)
                             .setCancelable(true)
                             .setTitle(playlist.getPlaylistName())
-                            .setMessage("All songs in the list will be deleted. Are you sure?")
+                            .setMessage(R.string.are_you_sure)
                             .setBackground(getActivity().getDrawable(R.drawable.custom_alert_dialog))
-                            .setPositiveButton("Yes", (dialog, which) -> {
+                            .setPositiveButton(getString(R.string.yes), (dialog, which) -> {
                                 viewModel.deleteAllTracksOnPlaylist(playlist.getPlaylistName());
                                 viewModel.deletePlaylist(playlist);
                                 dialog.dismiss();
                                 adapter.notifyDataSetChanged();
                                 viewModel.loadPlaylist();
                             })
-                            .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
+                            .setNegativeButton(getString(R.string.cancel), (dialog, which) -> dialog.dismiss());
                     builder.show();
                 }
             }
@@ -120,21 +172,19 @@ public class PlaylistFragment extends Fragment {
                         MusicStatusViewModel musicStatusViewModel = application.getMusicViewModel();
 
                         musicStatusViewModel.getFilePath().observe(getViewLifecycleOwner(), musicFileAdapter::getMusicIsPlaying);
+                        musicStatusViewModel.getIsPlayMusic().observe(getViewLifecycleOwner(), musicFileAdapter::setPlayedMusic);
 
                         musicFileAdapter.FavoriteClickListener(new FavoriteMusicAdapter.OnFavoriteMusicPlayListener() {
                             @Override
                             public void onMusicPlay(List<MusicFile> musicFiles, int position) {
-                                Intent intentStartMusicService = new Intent(getContext(), MusicPlayerService.class)
-                                        .putParcelableArrayListExtra(ExtraKey.MUSIC_LIST.getValue(), new ArrayList<>(musicFiles))
-                                        .putExtra(ExtraKey.MUSIC_LIST_POSITION.getValue(), position);
-
-                                getContext().startService(intentStartMusicService);
+                                PlayMusicWithEqualizer playMusicWithEqualizer = new PlayMusicWithEqualizer(getContext());
+                                playMusicWithEqualizer.startMusicService(musicFiles, position,false);
                             }
 
                             @Override
                             public void onDeleteFavorite(MusicFile musicFile) {
                                 viewModel.deleteTracksOnPlaylist(playlistName, musicFile.getFilePath());
-                                Toast.makeText(getContext(), "Deleted music on playlist", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), R.string.deleted_music_on_playlist, Toast.LENGTH_SHORT).show();
                                 viewModel.loadPlaylist();
                                 musicFileAdapter.notifyDataSetChanged();
                             }
@@ -156,5 +206,10 @@ public class PlaylistFragment extends Fragment {
         adNetworkManager.showSmallBannerAds(adsBannerLayoutPlaylistFragment);
 
         viewModel.loadPlaylist();
+    }
+
+    @Override
+    protected void onMusicDataLoaded(List<MusicFile> musicFiles) {
+
     }
 }

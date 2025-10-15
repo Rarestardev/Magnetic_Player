@@ -5,10 +5,10 @@ import android.content.Context;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.rarestardev.magneticplayer.dao.SearchDao;
-import com.rarestardev.magneticplayer.database.AppDatabase;
-import com.rarestardev.magneticplayer.database.DatabaseClient;
-import com.rarestardev.magneticplayer.entities.SearchEntity;
+import com.rarestardev.magneticplayer.database.dao.SearchDao;
+import com.rarestardev.magneticplayer.database.db.AppDatabase;
+import com.rarestardev.magneticplayer.database.db.DatabaseClient;
+import com.rarestardev.magneticplayer.database.entities.SearchEntity;
 import com.rarestardev.magneticplayer.model.MusicFile;
 import com.rarestardev.magneticplayer.utilities.MusicUtils;
 

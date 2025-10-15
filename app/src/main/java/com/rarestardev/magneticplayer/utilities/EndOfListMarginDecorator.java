@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class EndOfListMarginDecorator extends RecyclerView.ItemDecoration {
 
-    private static final int bottomMargin = 145;
+    private static final int bottomMargin = 480;
 
     public EndOfListMarginDecorator() {
 
@@ -24,9 +24,9 @@ public class EndOfListMarginDecorator extends RecyclerView.ItemDecoration {
 
         if (layoutManager instanceof LinearLayoutManager && adapter != null) {
             int position = parent.getChildAdapterPosition(view);
-            if (position == adapter.getItemCount() - 1){
+            if (position == adapter.getItemCount() - 1) {
                 outRect.bottom = bottomMargin;
-            }else {
+            } else {
                 outRect.bottom = 0;
             }
         }

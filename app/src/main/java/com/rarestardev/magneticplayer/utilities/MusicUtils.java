@@ -1,5 +1,6 @@
 package com.rarestardev.magneticplayer.utilities;
 
+import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
@@ -67,46 +68,38 @@ public class MusicUtils {
         Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         String selection = MediaStore.Audio.Media.DATA + " like ?";
         String[] selectionArgs = new String[]{folderPath + "%"};
-        String[] projection = {
-                MediaStore.Audio.Media._ID,
-                MediaStore.Audio.Media.DATA,
-                MediaStore.Audio.Media.ARTIST,
-                MediaStore.Audio.Media.ALBUM,
-                MediaStore.Audio.Media.DURATION,
-                MediaStore.Audio.Media.ALBUM_ID,
-                MediaStore.Audio.Media.TITLE,
-                MediaStore.Audio.Media.DATE_ADDED
-        };
-
         String order = MediaStore.Audio.Media.TITLE + " ASC";
 
-        Cursor cursor = contentResolver.query(uri, projection, selection, selectionArgs, order);
+        Cursor cursor = contentResolver.query(uri, projection(), selection, selectionArgs, order);
 
         if (cursor != null && cursor.moveToFirst()) {
-            int artistId = cursor.getColumnIndex(MediaStore.Audio.Media._ID);
-            int dataIndex = cursor.getColumnIndex(MediaStore.Audio.Media.DATA);  // file path
-            int artistIndex = cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST);  // artist name
-            int albumIndex = cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM);  // album name
-            int durationIndex = cursor.getColumnIndex(MediaStore.Audio.Media.DURATION);  // music duration
-            int albumArtIndex = cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID);// cover id
-            int titleIndex = cursor.getColumnIndex(MediaStore.Audio.Media.TITLE); // music name
+            int idIndex = cursor.getColumnIndex(MediaStore.Audio.Media._ID);
+            int dataIndex = cursor.getColumnIndex(MediaStore.Audio.Media.DATA);
+            int artistIndex = cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST);
+            int albumIndex = cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM);
+            int durationIndex = cursor.getColumnIndex(MediaStore.Audio.Media.DURATION);
+            int albumArtIndex = cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID);
+            int titleIndex = cursor.getColumnIndex(MediaStore.Audio.Media.TITLE);
             int dateAddedIndex = cursor.getColumnIndex(MediaStore.Audio.Media.DATE_ADDED);
 
             do {
-                int id = cursor.getInt(artistId);
+                int id = cursor.getInt(idIndex);
                 String filePath = cursor.getString(dataIndex);
                 String artist = cursor.getString(artistIndex);
                 String album = cursor.getString(albumIndex);
                 long duration = cursor.getLong(durationIndex);
-                String albumArtUri = getAlbumArtUri(context, cursor.getLong(albumArtIndex));  // cover uri
+                String albumArtUri = getAlbumArtUri(context, cursor.getLong(albumArtIndex));
                 String songTitle = cursor.getString(titleIndex);
                 long dateAdded = cursor.getLong(dateAddedIndex);
 
-                musicFiles.add(new MusicFile(id, filePath, artist, album, duration, albumArtUri, songTitle, dateAdded));
+                String genre = getGenreForAudioId(context, id);
+
+                musicFiles.add(new MusicFile(id, filePath, artist, album, genre, duration, albumArtUri, songTitle, dateAdded));
             } while (cursor.moveToNext());
 
             cursor.close();
         }
+
         return musicFiles;
     }
 
@@ -116,7 +109,43 @@ public class MusicUtils {
         Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         String selection = MediaStore.Audio.Media.TITLE + " like ?";
         String[] selectionArgs = new String[]{query + "%"};
-        String[] projection = {
+        String order = MediaStore.Audio.Media.TITLE + " ASC";
+
+        Cursor cursor = contentResolver.query(uri, projection(), selection, selectionArgs, order);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            int idIndex = cursor.getColumnIndex(MediaStore.Audio.Media._ID);
+            int dataIndex = cursor.getColumnIndex(MediaStore.Audio.Media.DATA);
+            int artistIndex = cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST);
+            int albumIndex = cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM);
+            int durationIndex = cursor.getColumnIndex(MediaStore.Audio.Media.DURATION);
+            int albumArtIndex = cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID);
+            int titleIndex = cursor.getColumnIndex(MediaStore.Audio.Media.TITLE);
+            int dateAddedIndex = cursor.getColumnIndex(MediaStore.Audio.Media.DATE_ADDED);
+
+            do {
+                int id = cursor.getInt(idIndex);
+                String filePath = cursor.getString(dataIndex);
+                String artist = cursor.getString(artistIndex);
+                String album = cursor.getString(albumIndex);
+                long duration = cursor.getLong(durationIndex);
+                String albumArtUri = getAlbumArtUri(context, cursor.getLong(albumArtIndex));
+                String songTitle = cursor.getString(titleIndex);
+                long dateAdded = cursor.getLong(dateAddedIndex);
+
+                String genre = getGenreForAudioId(context, id);
+
+                musicFiles.add(new MusicFile(id, filePath, artist, album, genre, duration, albumArtUri, songTitle, dateAdded));
+            } while (cursor.moveToNext());
+
+            cursor.close();
+        }
+
+        return musicFiles;
+    }
+
+    private static String[] projection() {
+        return new String[]{
                 MediaStore.Audio.Media._ID,
                 MediaStore.Audio.Media.DATA,
                 MediaStore.Audio.Media.ARTIST,
@@ -126,38 +155,26 @@ public class MusicUtils {
                 MediaStore.Audio.Media.TITLE,
                 MediaStore.Audio.Media.DATE_ADDED
         };
-
-        String order = MediaStore.Audio.Media.TITLE + " ASC";
-
-        Cursor cursor = contentResolver.query(uri, projection, selection, selectionArgs, order);
-
-        if (cursor != null && cursor.moveToFirst()) {
-            int artistId = cursor.getColumnIndex(MediaStore.Audio.Media._ID);
-            int dataIndex = cursor.getColumnIndex(MediaStore.Audio.Media.DATA);  // file path
-            int artistIndex = cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST);  // artist name
-            int albumIndex = cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM);  // album name
-            int durationIndex = cursor.getColumnIndex(MediaStore.Audio.Media.DURATION);  // music duration
-            int albumArtIndex = cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID);// cover id
-            int titleIndex = cursor.getColumnIndex(MediaStore.Audio.Media.TITLE); // music name
-            int dateAddedIndex = cursor.getColumnIndex(MediaStore.Audio.Media.DATE_ADDED);
-
-            do {
-                int id = cursor.getInt(artistId);
-                String filePath = cursor.getString(dataIndex);
-                String artist = cursor.getString(artistIndex);
-                String album = cursor.getString(albumIndex);
-                long duration = cursor.getLong(durationIndex);
-                String albumArtUri = getAlbumArtUri(context, cursor.getLong(albumArtIndex));  // cover uri
-                String songTitle = cursor.getString(titleIndex);
-                long dateAdded = cursor.getLong(dateAddedIndex);
-
-                musicFiles.add(new MusicFile(id, filePath, artist, album, duration, albumArtUri, songTitle, dateAdded));
-            } while (cursor.moveToNext());
-
-            cursor.close();
-        }
-        return musicFiles;
     }
 
+    @SuppressLint("Range")
+    private static String getGenreForAudioId(Context context, int audioId) {
+        Uri genreUri = MediaStore.Audio.Genres.getContentUriForAudioId("external", audioId);
+        Cursor genreCursor = context.getContentResolver().query(
+                genreUri,
+                new String[]{MediaStore.Audio.Genres.NAME},
+                null,
+                null,
+                null
+        );
+
+        String genre = null;
+        if (genreCursor != null && genreCursor.moveToFirst()) {
+            genre = genreCursor.getString(genreCursor.getColumnIndex(MediaStore.Audio.Genres.NAME));
+            genreCursor.close();
+        }
+
+        return (genre == null || genre.trim().isEmpty()) ? "Unknown" : genre;
+    }
 }
 

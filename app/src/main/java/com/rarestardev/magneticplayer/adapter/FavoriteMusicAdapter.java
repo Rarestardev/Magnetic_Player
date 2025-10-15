@@ -18,23 +18,32 @@ import com.rarestardev.magneticplayer.model.MusicFile;
 
 import java.util.List;
 
+import eu.gsottbauer.equalizerview.EqualizerView;
+
 public class FavoriteMusicAdapter extends RecyclerView.Adapter<FavoriteMusicAdapter.FavoriteViewHolder> {
 
     private final Context context;
     private OnFavoriteMusicPlayListener listener;
     private String filePath;
     private List<MusicFile> musicFiles;
+    private boolean isPlayedMusic = false;
 
     public FavoriteMusicAdapter(Context context) {
         this.context = context;
     }
 
-    public void FavoriteClickListener(OnFavoriteMusicPlayListener listener){
+    public void FavoriteClickListener(OnFavoriteMusicPlayListener listener) {
         this.listener = listener;
     }
 
     public void setList(List<MusicFile> musicFiles) {
         this.musicFiles = musicFiles;
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void setPlayedMusic(boolean playedMusic) {
+        isPlayedMusic = playedMusic;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -61,15 +70,22 @@ public class FavoriteMusicAdapter extends RecyclerView.Adapter<FavoriteMusicAdap
 
         holder.delete_favorite.setOnClickListener(v -> listener.onDeleteFavorite(musicFile));
 
-        holder.is_playing_music.setVisibility(View.GONE);
-
         if (filePath != null) {
-            if (!filePath.isEmpty() && filePath.equals(musicFile.getFilePath())) {
-                holder.is_playing_music.setVisibility(View.VISIBLE);
-            } else {
+            if (filePath.equals(musicFile.getFilePath())) {
+                if (isPlayedMusic) {
+                    holder.is_playing_music.setVisibility(View.VISIBLE);
+                    holder.is_playing_music.animateBars();
+                } else {
+                    holder.is_playing_music.setVisibility(View.GONE);
+                    holder.is_playing_music.stopBars();
+                }
+            }else {
                 holder.is_playing_music.setVisibility(View.GONE);
+                holder.is_playing_music.stopBars();
             }
-
+        }else {
+            holder.is_playing_music.setVisibility(View.GONE);
+            holder.is_playing_music.stopBars();
         }
     }
 
@@ -89,7 +105,8 @@ public class FavoriteMusicAdapter extends RecyclerView.Adapter<FavoriteMusicAdap
 
         RoundedImageView albumArt;
         AppCompatTextView tvFileName, tvAlbumName;
-        AppCompatImageView is_playing_music,delete_favorite;
+        AppCompatImageView delete_favorite;
+        EqualizerView is_playing_music;
 
         public FavoriteViewHolder(@NonNull View itemView) {
             super(itemView);

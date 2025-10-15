@@ -1,71 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:maxHeight="160dp"
-    android:layout_margin="3dp"
-    app:cardBackgroundColor="?colorPrimary"
-    app:cardCornerRadius="8dp">
+    android:layout_margin="4dp"
+    >
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/album_cover"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/album_cover_height"
+        android:scaleType="fitXY"
+        app:riv_corner_radius="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
 
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/album_cover"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:scaleType="fitXY"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:riv_corner_radius="8dp"
-            tools:src="@tools:sample/avatars" />
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@id/album_cover"
+        app:layout_constraintEnd_toEndOf="@id/album_cover"
+        app:layout_constraintStart_toStartOf="@id/album_cover">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="0dp"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/album_name"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/album_cover"
-            app:layout_constraintStart_toStartOf="@id/album_cover"
-            app:layout_constraintTop_toBottomOf="@id/album_cover">
+            android:ellipsize="end"
+            android:gravity="start"
+            android:maxLines="1"
+            android:layout_gravity="center_horizontal"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:textAlignment="gravity"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_body1"
+            tools:text="@string/app_name" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/album_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:gravity="start"
-                android:maxLines="1"
-                android:paddingStart="4dp"
-                android:paddingEnd="4dp"
-                android:textAlignment="gravity"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                tools:text="@string/app_name" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/artist_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:maxLines="1"
+            android:layout_gravity="center_horizontal"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:textSize="@dimen/text_size_body1"
+            android:textAlignment="gravity"
+            android:textColor="@color/white"
+            tools:text="@string/app_name" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/artist_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:gravity="start"
-                android:maxLines="1"
-                android:paddingStart="4dp"
-                android:paddingEnd="4dp"
-                android:textAlignment="gravity"
-                android:textColor="?colorOnSecondary"
-                android:textSize="12sp"
-                tools:text="@string/app_name" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

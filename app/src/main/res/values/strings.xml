@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">Magnetic Player</string>
+    <string name="app_name">MGPlayer</string>
 
     <!-- Main Activity Strings -->
     <string name="play_list">Playlist</string>
-    <string name="recent_play"># Your Popular</string>
+    <string name="recent_play">History</string>
 
     <!-- Tabs Title -->
     <string name="tab_folders">Folders</string>
@@ -28,16 +28,114 @@
     <string name="save_new_playlist">Save</string>
     <string name="details">Details</string>
     <string name="share">Share</string>
-    <string name="showHidePopular">Show Popular Music</string>
+    <string name="showHidePopular" translatable="false">Show Popular Music</string>
     <string name="theme">Theme</string>
     <string name="auto">Auto</string>
     <string name="lightMode">Light</string>
     <string name="nightMode">Night</string>
-    <string name="versionApp">Version : 1.0</string>
+    <string name="versionApp">Version</string>
     <string name="show_cover">Show cover</string>
     <string name="not_find_album">Not find album!</string>
     <string name="not_find_folder">Not find folder music!</string>
     <string name="support">Support</string>
+    <string name="equalizer">Equalizer</string>
+    <string name="preset" translatable="false">Preset</string>
+    <string name="bass_boost" translatable="false">Bass Boost</string>
+    <string name="reverb_level" translatable="false">Reverb Level</string>
+    <string name="loudness_gain" translatable="false">Loudness Gain</string>
+    <string name="waveform" translatable="false">Waveform</string>
+    <string name="spectrum_analyzer" translatable="false">Spectrum Analyzer</string>
+    <string name="manual_adjustment" translatable="false">Manual Adjustment</string>
+    <string name="eq" translatable="false">EQ</string>
+    <string name="sleep_timer">Sleep Timer</string>
+    <string name="apply">Apply</string>
+    <string name="stop_timer">Stop Timer</string>
+    <string name="warning_restart_activity_theme">Important! , if you choose a custom appearance,the program will automatically restart.</string>
+    <string name="system_theme">System themes</string>
+    <string name="appearance">Appearance</string>
+    <string name="background" translatable="false">Background</string>
+    <string name="dynamic_color_player_background">Dynamic Color Player Background</string>
+    <string name="other">Other</string>
+    <string name="rotate_animation_cover_music">Rotate Animation Cover Music</string>
+    <string name="tools">Tools</string>
+    <string name="language">Language</string>
+    <string name="about">About</string>
+    <string name="personalization">Personalization</string>
+    <string name="lyric" translatable="false">Lyric</string>
+    <string name="add">Add</string>
+    <string name="repeat_music">Repeat Song</string>
+    <string name="off_all">Off All</string>
+    <string name="pause_music">Pause Music</string>
+    <string name="resume_music">Resume Music</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="queue_list">Queue list</string>
+    <string name="add_favorite">Add Favorite</string>
+    <string name="remove_favorite">Remove Favorite</string>
+    <string name="no_lyric" translatable="false">No lyric</string>
+    <string name="home_menu">Home</string>
+    <string name="favorite_menu">Favorite</string>
+    <string name="local_menu" translatable="false">Local</string>
+    <string name="artist">Artist</string>
+    <string name="see_all" translatable="false">See All</string>
+    <string name="no_cover">no cover this artist!</string>
+    <string name="your_popular_songs" translatable="false"># Your \n \t\t\t\t\t Popular \n \t\t\t\t\t\t\t\t\t\t\t Songs</string>
+    <string name="play">Play</string>
+    <string name="view">View</string>
+    <string name="warning">Warning !</string>
+    <string name="are_you_sure_for_delete_all_history">Are you sure for delete all history ?</string>
+    <string name="are_you_sure_for_delete_history">Are you sure for delete this history ?</string>
+    <string name="yes">Yes</string>
+    <string name="cancel">Cancel</string>
+    <string name="album">Album</string>
+    <string name="genre">Genre</string>
+    <string name="there_is_no_music_for_this_genre">There is no music for this genre!</string>
+    <string name="not_used_this_icon" translatable="false">not used this icon</string>
+    <string name="exit">Exit &amp; stop</string>
+    <string name="delete_all">Delete All</string>
+    <string name="delete">Delete</string>
+    <string name="the_list_is_empty">The list is empty!</string>
+    <string name="persian">Persian</string>
+    <string name="english">English</string>
+    <string name="type_a_word_for_search_music">Type a word for search music…</string>
+    <string name="shuffle_play_started">Shuffle play started…</string>
+    <string name="add_to_favorite">Add to favorite</string>
+    <string name="remove_on_favorite">Remove on favorite</string>
+    <string name="minute">minute</string>
+    <string name="sleep_timer_started">Sleep timer started…</string>
+    <string name="add_playlist">Add playlist</string>
+    <string name="play_list_name">Playlist name…</string>
+    <string name="saved_new_playlist">Saved new playlist</string>
+    <string name="are_you_sure">All songs in the list will be deleted. Are you sure?</string>
+    <string name="deleted_music_on_playlist">Deleted music on playlist</string>
+    <string name="this_music_is_available_in_the_playlist">This music is available in the playlist.</string>
+    <string name="please_type_your_playlist_name">Please type your playlist name!</string>
+    <string name="waveform_spectrumView"><![CDATA[Waveform & Spectrum Analyzer]]></string>
+    <string name="song">"Song :  "</string>
+    <string name="duration">"Duration :  "</string>
+    <string name="path">"Path :  "</string>
+    <string name="your_device_does_not_support_this_equalize">Your device does not support this equalize.</string>
+    <string name="press_the_back_button_again_to_exit">Press the back button again to exit.</string>
 
+    <string-array name="music_genres">
+        <item>Pop</item>
+        <item>Rock</item>
+        <item>Jazz</item>
+        <item>Classical</item>
+        <item>Hip Hop</item>
+        <item>Electronic</item>
+        <item>Reggae</item>
+        <item>Blues</item>
+        <item>Metal</item>
+        <item>Folk</item>
+        <item>R&amp;B</item>
+        <item>Ambient</item>
+        <item>Soundtrack</item>
+        <item>World</item>
+        <item>Dance</item>
+        <item>Instrumental</item>
+        <item>Alternative</item>
+        <item>Unknown</item>
+    </string-array>
 
 </resources>

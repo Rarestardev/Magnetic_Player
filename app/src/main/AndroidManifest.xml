@@ -15,35 +15,60 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:name=".application.MusicApplication"
-        android:icon="@drawable/magnetic_icon"
+        android:icon="@drawable/mg_player_ic"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/magnetic_icon"
+        android:roundIcon="@drawable/mg_player_ic"
         android:supportsRtl="true"
         android:theme="@style/Theme.MagneticPlayer"
         tools:targetApi="31">
         <activity
+            android:name=".music_utils.music_folder.FolderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".music_utils.history.HistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".music_utils.popular.AllPopularActivity"
+            android:exported="false" />
+        <activity
+            android:name=".music_utils.genre.GenreViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".music_utils.album.AlbumActivity"
+            android:exported="false" />
+        <activity
+            android:name=".music_utils.artist.AllArtistViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".music_utils.artist.ArtistInformationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".settings.views.SettingsPageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".music_utils.equalizer.views.EqualizerActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.activities.BaseActivity"
             android:exported="false" />
         <activity
-            android:name=".view.activities.MoreRecentTracksActivity"
-            android:exported="false" />
-        <activity
             android:name=".view.activities.MainActivity"
-            android:uiOptions="none"
             android:exported="false" />
         <activity
-            android:name=".view.settings.SettingsActivity"
+            android:name=".settings.views.SettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".view.activities.MusicPlayerActivity"
+            android:name=".music_utils.music.MusicPlayerActivity"
             android:exported="true" />
         <activity
             android:name=".view.activities.SearchActivity"
-            android:exported="false"
-            />
+            android:exported="false" />
         <activity
             android:name=".view.activities.SplashActivity"
             android:exported="true">
@@ -55,19 +80,19 @@
         </activity>
 
         <service
-            android:name=".controller.MusicPlayerService"
+            android:name=".service.MusicPlayerService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="mediaPlayback" />
 
         <receiver
-            android:name=".controller.MusicBroadcastReceiver"
+            android:name=".receiver.MusicBroadcastReceiver"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.rarestardev.magneticplayer.ACTION_NOTIFICATION_CLOSE" />
-                <action android:name="com.rarestardev.magneticplayer.ACTION_NOTIFICATION_PLAY_PAUSE" />
-                <action android:name="com.rarestardev.magneticplayer.ACTION_NOTIFICATION_PREVIOUS" />
-                <action android:name="com.rarestardev.magneticplayer.ACTION_NOTIFICATION_NEXT" />
+                <action android:name="mgplayer.ACTION_NOTIFICATION_CLOSE" />
+                <action android:name="mgplayer.ACTION_NOTIFICATION_PLAY_PAUSE" />
+                <action android:name="mgplayer.ACTION_NOTIFICATION_PREVIOUS" />
+                <action android:name="mgplayer.ACTION_NOTIFICATION_NEXT" />
             </intent-filter>
         </receiver>
 
@@ -79,7 +104,6 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
-
         </provider>
     </application>
 

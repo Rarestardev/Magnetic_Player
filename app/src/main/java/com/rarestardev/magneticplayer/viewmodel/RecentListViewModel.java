@@ -39,4 +39,12 @@ public class RecentListViewModel extends AndroidViewModel {
         }
         return musicFileList;
     }
+
+    public void deleteAllHistory() {
+        recentListRepository.deleteAllHistory();
+    }
+
+    public void deleteHistoryItem(RecentList recentList) {
+        recentListRepository.deleteHistoryListItem(recentList);
+    }
 }

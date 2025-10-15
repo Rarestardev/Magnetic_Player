@@ -4,19 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="versionName"
+            type="String" />
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".view.settings.SettingsActivity">
+        android:fitsSystemWindows="true"
+        tools:context=".settings.views.SettingsActivity">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_app_bar"
-            android:layout_marginTop="@dimen/margin_top_all_activity"
             android:elevation="@dimen/elevation_app_bar"
             android:paddingStart="@dimen/padding_standard"
             android:paddingEnd="@dimen/padding_standard">
@@ -65,105 +67,172 @@
                 android:orientation="vertical"
                 android:padding="@dimen/padding_standard">
 
-                <com.google.android.material.materialswitch.MaterialSwitch
-                    android:id="@+id/show_popular_music_switch"
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/settings_item_shape"
-                    android:checked="false"
-                    android:hapticFeedbackEnabled="true"
-                    android:hyphenationFrequency="normalFast"
-                    android:padding="@dimen/padding_standard"
-                    android:text="@string/showHidePopular"
-                    android:textSize="@dimen/text_size_body1"
-                    android:textStyle="bold"
-                    app:thumbTint="@color/settings_btn_color"
-                    app:thumbTintMode="multiply"
-                    app:trackDecorationTint="@color/settings_btn_color"
-                    app:trackTint="?android:windowBackground" />
+                    android:orientation="vertical"
+                    android:padding="@dimen/padding_standard">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:gravity="start"
+                        android:text="@string/appearance"
+                        android:textAlignment="gravity"
+                        android:textColor="?colorSecondary"
+                        android:textSize="@dimen/text_size_body1"
+                        android:textStyle="bold" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/personalization"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/settings_item_height"
+                        android:layout_marginTop="@dimen/margin_standard"
+                        android:background="@drawable/settings_item_shape"
+                        android:clickable="true"
+                        android:drawableEnd="@drawable/ic_forward"
+                        android:drawablePadding="@dimen/padding_standard"
+                        android:drawableTint="?iconTint"
+                        android:gravity="center_vertical"
+                        android:padding="6dp"
+                        android:text="@string/personalization"
+                        android:textAlignment="gravity"
+                        android:textColor="?android:textColor"
+                        android:textStyle="normal" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/dynamic_player_background_switch"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/settings_item_height"
+                        android:layout_marginTop="12dp"
+                        android:breakStrategy="high_quality"
+                        android:checked="true"
+                        android:hapticFeedbackEnabled="true"
+                        android:hyphenationFrequency="normalFast"
+                        android:padding="6dp"
+                        android:text="@string/dynamic_color_player_background"
+                        android:textColor="?android:textColor"
+                        android:textSize="@dimen/text_size_body2"
+                        android:textStyle="normal"
+                        app:thumbTint="?colorSecondary"
+                        app:trackDecorationTint="?colorSecondary"
+                        app:trackTint="?android:windowBackground"
+                        tools:ignore="VisualLintButtonSize" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/rotate_animation_cover_music_switch"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/settings_item_height"
+                        android:layout_marginTop="12dp"
+                        android:breakStrategy="high_quality"
+                        android:checked="true"
+                        android:hapticFeedbackEnabled="true"
+                        android:hyphenationFrequency="normalFast"
+                        android:padding="6dp"
+                        android:text="@string/rotate_animation_cover_music"
+                        android:textColor="?android:textColor"
+                        android:textSize="@dimen/text_size_body2"
+                        android:textStyle="normal"
+                        app:thumbTint="?colorSecondary"
+                        app:trackDecorationTint="?colorSecondary"
+                        app:trackTint="?android:windowBackground"
+                        tools:ignore="VisualLintButtonSize" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/margin_standard"
                     android:background="@drawable/settings_item_shape"
                     android:orientation="vertical"
                     android:padding="@dimen/padding_standard">
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/theme"
-                        android:textSize="@dimen/text_size_body1"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <com.google.android.material.divider.MaterialDivider
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="8dp"
-                        app:dividerColor="?android:windowBackground" />
-
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="10dp"
-                        android:orientation="horizontal">
+                        android:layout_gravity="start"
+                        android:gravity="start"
+                        android:text="@string/tools"
+                        android:textAlignment="gravity"
+                        android:textColor="?colorSecondary"
+                        android:textSize="@dimen/text_size_body1"
+                        android:textStyle="bold" />
 
-                        <include
-                            android:id="@+id/autoMode"
-                            layout="@layout/theme_item"
+                    <RelativeLayout
+                        android:id="@+id/language_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="@dimen/margin_standard"
+                        android:clickable="true"
+                        android:padding="@dimen/padding_standard">
+
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp" />
+                            android:layout_height="@dimen/settings_item_height"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:gravity="center_vertical"
+                            android:text="@string/language"
+                            android:textAlignment="gravity"
+                            android:textColor="?android:textColor"
+                            android:textSize="@dimen/text_size_body2"
+                            android:textStyle="normal"
+                            tools:ignore="TextSizeCheck" />
 
-                        <include
-                            android:id="@+id/lightMode"
-                            layout="@layout/theme_item"
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/language"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp" />
+                            android:layout_height="@dimen/settings_item_height"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:drawableEnd="@drawable/ic_forward"
+                            android:drawablePadding="@dimen/padding_standard"
+                            android:drawableTint="?iconTint"
+                            android:gravity="center_vertical"
+                            android:textAlignment="gravity"
+                            android:textColor="?android:textColor"
+                            android:textSize="@dimen/text_size_body2"
+                            android:textStyle="bold"
+                            tools:ignore="RelativeOverlap,TextSizeCheck"
+                            tools:text="English" />
 
-                        <include
-                            android:id="@+id/nightMode"
-                            layout="@layout/theme_item"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-                    </androidx.appcompat.widget.LinearLayoutCompat>
-
+                    </RelativeLayout>
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/support"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/settings_item_height"
                     android:layout_marginTop="@dimen/margin_standard"
                     android:background="@drawable/settings_item_shape"
-                    android:drawableEnd="@drawable/ic_forward"
-                    android:gravity="center_vertical"
-                    android:padding="@dimen/padding_standard"
-                    android:text="@string/support"
-                    android:textAlignment="gravity"
-                    android:textSize="@dimen/text_size_body1"
-                    android:textStyle="bold" />
+                    android:padding="@dimen/padding_standard">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_standard"
-                    android:background="@drawable/settings_item_shape"
-                    android:gravity="center_vertical"
-                    android:padding="@dimen/padding_standard"
-                    android:text="@string/versionApp"
-                    android:textAlignment="gravity"
-                    android:textSize="@dimen/text_size_body1"
-                    android:textStyle="bold" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/versionApp"
+                        android:textColor="?colorSecondary"
+                        android:textSize="@dimen/text_size_body1"
+                        android:textStyle="bold" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:textColor="?android:textColor"
+                        android:textSize="@dimen/text_size_body1"
+                        android:textStyle="bold"
+                        tools:ignore="RelativeOverlap"
+                        android:text="@={versionName}"
+                        tools:text="2.0.1" />
+
+                </RelativeLayout>
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -210,6 +279,10 @@
 
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 

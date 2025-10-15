@@ -11,7 +11,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.rarestardev.magneticplayer.R;
-import com.rarestardev.magneticplayer.entities.PlaylistEntity;
+import com.rarestardev.magneticplayer.database.entities.PlaylistEntity;
 import com.rarestardev.magneticplayer.listener.PlaylistListener;
 
 import java.util.List;

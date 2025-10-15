@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.rarestardev.magneticplayer.entities.SearchEntity;
+import com.rarestardev.magneticplayer.database.entities.SearchEntity;
 import com.rarestardev.magneticplayer.model.MusicFile;
 import com.rarestardev.magneticplayer.repositories.SearchMusicRepository;
 

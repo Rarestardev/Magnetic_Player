@@ -2,8 +2,6 @@ package com.rarestardev.magneticplayer.utilities;
 
 import android.app.Activity;
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -37,7 +35,7 @@ public class AdNetworkManager {
     }
 
     public void showNativeBannerAd(AdiveryNativeAdView adView) {
-        if (Constants.isShowingAdsInApp && isInternetConnected()) {
+        if (Constants.isShowingAdsInApp && ConnectionManager.isInternetConnected(context)) {
             new Thread(() -> {
                 adView.setListener(new AdiveryAdListener() {
                     @Override
@@ -70,7 +68,7 @@ public class AdNetworkManager {
     }
 
     public void showNativeBannerAdWithHide(AdiveryNativeAdView adView, RelativeLayout layout) {
-        if (Constants.isShowingAdsInApp && isInternetConnected()) {
+        if (Constants.isShowingAdsInApp && ConnectionManager.isInternetConnected(context)) {
             new Thread(() -> {
                 adView.setListener(new AdiveryAdListener() {
                     @Override
@@ -105,7 +103,7 @@ public class AdNetworkManager {
     }
 
     public void showSmallBannerAds(AdiveryBannerAdView targetBanner) {
-        if (Constants.isShowingAdsInApp && isInternetConnected()) {
+        if (Constants.isShowingAdsInApp && ConnectionManager.isInternetConnected(context)) {
             targetBanner.setVisibility(View.GONE);
             new Thread(() -> {
                 targetBanner.setBannerAdListener(new AdiveryAdListener() {
@@ -138,31 +136,5 @@ public class AdNetworkManager {
         } else {
             targetBanner.setVisibility(View.GONE);
         }
-    }
-
-    // check internet connection
-    private Boolean isInternetConnected() {
-        if (isInternetEnable()) {
-            try {
-                Process process = Runtime.getRuntime().exec("ping -c 1 google.com");
-                int returnVal = process.waitFor();
-                return (returnVal == 0);
-            } catch (Exception e) {
-                e.printStackTrace();
-                Log.e(Constants.appLog, e.getMessage());
-            }
-        }
-        return false;
-    }
-
-    // Check enable wifi or mobile data
-    private Boolean isInternetEnable() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        if (connectivityManager != null) {
-            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-            return networkInfo != null && networkInfo.isConnectedOrConnecting();
-        }
-        return false;
     }
 }

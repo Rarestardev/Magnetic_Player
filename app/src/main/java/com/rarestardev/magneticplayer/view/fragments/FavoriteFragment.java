@@ -1,12 +1,10 @@
 package com.rarestardev.magneticplayer.view.fragments;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -17,19 +15,17 @@ import android.view.ViewGroup;
 import com.rarestardev.magneticplayer.R;
 import com.rarestardev.magneticplayer.adapter.FavoriteMusicAdapter;
 import com.rarestardev.magneticplayer.application.MusicApplication;
-import com.rarestardev.magneticplayer.controller.MusicPlayerService;
+import com.rarestardev.magneticplayer.helper.PlayMusicWithEqualizer;
 import com.rarestardev.magneticplayer.databinding.FragmentPopularBinding;
-import com.rarestardev.magneticplayer.enums.ExtraKey;
 import com.rarestardev.magneticplayer.model.MusicFile;
 import com.rarestardev.magneticplayer.utilities.AdNetworkManager;
 import com.rarestardev.magneticplayer.utilities.EndOfListMarginDecorator;
 import com.rarestardev.magneticplayer.viewmodel.FavoriteMusicViewModel;
 import com.rarestardev.magneticplayer.viewmodel.MusicStatusViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class FavoriteFragment extends Fragment implements FavoriteMusicAdapter.OnFavoriteMusicPlayListener {
+public class FavoriteFragment extends BaseFragment implements FavoriteMusicAdapter.OnFavoriteMusicPlayListener {
 
     private FragmentPopularBinding binding;
     private FavoriteMusicViewModel favoriteMusicViewModel;
@@ -63,6 +59,7 @@ public class FavoriteFragment extends Fragment implements FavoriteMusicAdapter.O
         MusicStatusViewModel musicStatusViewModel = application.getMusicViewModel();
 
         musicStatusViewModel.getFilePath().observe(getViewLifecycleOwner(), s -> adapter.getMusicIsPlaying(s));
+        musicStatusViewModel.getIsPlayMusic().observe(this, adapter::setPlayedMusic);
     }
 
     private void loadFavoriteMusic() {
@@ -85,10 +82,8 @@ public class FavoriteFragment extends Fragment implements FavoriteMusicAdapter.O
 
     @Override
     public void onMusicPlay(List<MusicFile> musicFiles, int position) {
-        Intent service = new Intent(getContext(), MusicPlayerService.class);
-        service.putParcelableArrayListExtra(ExtraKey.MUSIC_LIST.getValue(), new ArrayList<>(musicFiles));
-        service.putExtra(ExtraKey.MUSIC_LIST_POSITION.getValue(), position);
-        getActivity().startService(service);
+        PlayMusicWithEqualizer playMusicWithEqualizer = new PlayMusicWithEqualizer(getContext());
+        playMusicWithEqualizer.startMusicService(musicFiles,position,false);
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -103,5 +98,10 @@ public class FavoriteFragment extends Fragment implements FavoriteMusicAdapter.O
     public void onResume() {
         super.onResume();
         doInitialization();
+    }
+
+    @Override
+    protected void onMusicDataLoaded(List<MusicFile> musicFiles) {
+
     }
 }

@@ -7,31 +7,31 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
-import android.view.ViewStub;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.WindowCompat;
 
-import com.adivery.sdk.AdiveryBannerAdView;
 import com.rarestardev.magneticplayer.R;
-import com.rarestardev.magneticplayer.application.MusicApplication;
-import com.rarestardev.magneticplayer.controller.MusicPlaybackSettings;
-import com.rarestardev.magneticplayer.controller.MusicPlayerService;
-import com.rarestardev.magneticplayer.controller.MusicUiManager;
+import com.rarestardev.magneticplayer.music_utils.music.MusicPlaybackSettings;
+import com.rarestardev.magneticplayer.service.MusicPlayerService;
 import com.rarestardev.magneticplayer.enums.NotificationAction;
+import com.rarestardev.magneticplayer.settings.storage.LanguageStorage;
+import com.rarestardev.magneticplayer.settings.storage.ThemesStorage;
 import com.rarestardev.magneticplayer.utilities.AdNetworkManager;
 import com.rarestardev.magneticplayer.utilities.ClearCache;
 import com.rarestardev.magneticplayer.utilities.Constants;
-import com.rarestardev.magneticplayer.utilities.NavigationBarUtils;
-import com.rarestardev.magneticplayer.viewmodel.MusicStatusViewModel;
+
+import java.util.Locale;
 
 public class BaseActivity extends AppCompatActivity {
 
     private MusicPlayerService musicService;
     private boolean isBound = false;
-    private MusicUiManager uiManager;
     private AdNetworkManager adNetworkManager;
 
     private final ServiceConnection connection = new ServiceConnection() {
@@ -54,65 +54,60 @@ public class BaseActivity extends AppCompatActivity {
     @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        EdgeToEdge.enable(this);
         super.onCreate(savedInstanceState);
+
+        handleThemeMode();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        NavigationBarUtils.setNavigationBarColor(this,0);
         adNetworkManager = new AdNetworkManager(this);
+
+        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
     }
 
-    public void setMusicPlayerUi(ViewStub viewStub) {
-        uiManager = new MusicUiManager(this);
-        uiManager.getViewStub(viewStub);
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        LanguageStorage storage = new LanguageStorage(newBase);
+        String langCode = storage.getCurrentLanguage();
 
-        MusicApplication application = (MusicApplication) getApplication();
-        MusicStatusViewModel musicStatusViewModel = application.getMusicViewModel();
-
-        musicStatusViewModel.getMusicInfo().observe(this, musicFile -> {
-            if (musicFile != null) {
-                uiManager.getMusicData(musicFile);
-            }
-        });
-
-        musicStatusViewModel.getIsPlayMusic().observe(this, aBoolean -> {
-            if (aBoolean != null)
-                uiManager.getIsPlayMusic(aBoolean);
-        });
-
-        uiManager.setListener(new MusicUiManager.OnPlayPauseMusicListener() {
-            @Override
-            public void onClickViewPlayPause() {
-                if (isBound && musicService != null) { // check the service connected and not null music service
-                    if (musicService.getMusicIsPlaying()) { // music is play
-                        musicService.pauseMusic();
-                        uiManager.getIsPlayMusic(false);
-                    } else {
-
-                        musicService.resumeMusic();
-                        uiManager.getIsPlayMusic(true);
-                    }
-                }
-            }
-
-            @Override
-            public void onClickNext() {
-                if (isBound && musicService != null) {
-                    musicService.playNextMusic();
-                }
-            }
-
-            @Override
-            public void onClickPrevious() {
-                if (isBound && musicService != null) {
-                    musicService.playPreviousMusic();
-                }
-            }
-        });
+        Context context = updateBaseContextLocale(newBase, langCode);
+        super.attachBaseContext(context);
     }
 
-    public void setSmallBannerAds(AdiveryBannerAdView bannerAdView){
-        if (bannerAdView != null){
-            adNetworkManager.showSmallBannerAds(bannerAdView);
+    private Context updateBaseContextLocale(Context context, String language) {
+        Locale locale = new Locale(language);
+        Locale.setDefault(locale);
+
+        Configuration config = context.getResources().getConfiguration();
+        config.setLocale(locale);
+
+        return context.createConfigurationContext(config);
+    }
+
+
+    private void handleThemeMode() {
+        ThemesStorage storage = new ThemesStorage(this);
+        if (storage.getThemeName() != null) {
+            switch (storage.getThemeName()) {
+                case "BaseColor":
+                    setTheme(R.style.Base_Theme_MagneticPlayer);
+                    break;
+                case "Orange":
+                    setTheme(R.style.Orange_Theme_MagneticPlayer);
+                    break;
+                case "DarkSlate":
+                    setTheme(R.style.Dark_Slate_Gray_Theme_MagneticPlayer);
+                    break;
+                case "Red":
+                    setTheme(R.style.Red_Theme_MagneticPlayer);
+                    break;
+                case "Purple":
+                    setTheme(R.style.Purple_Theme_MagneticPlayer);
+                    break;
+                case "Green":
+                    setTheme(R.style.Green_Theme_MagneticPlayer);
+                    break;
+            }
         }
     }
 

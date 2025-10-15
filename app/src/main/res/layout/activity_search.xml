@@ -13,13 +13,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
         tools:context=".view.activities.SearchActivity">
 
         <RelativeLayout
             android:id="@+id/custom_app_bar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_app_bar"
-            android:layout_marginTop="@dimen/margin_top_all_activity"
             android:elevation="@dimen/elevation_app_bar"
             android:paddingStart="@dimen/padding_standard"
             android:paddingEnd="@dimen/padding_standard"

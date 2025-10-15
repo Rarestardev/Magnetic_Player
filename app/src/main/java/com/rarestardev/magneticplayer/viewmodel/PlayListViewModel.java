@@ -8,11 +8,11 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.rarestardev.magneticplayer.dao.PlaylistDao;
-import com.rarestardev.magneticplayer.database.AppDatabase;
-import com.rarestardev.magneticplayer.database.DatabaseClient;
-import com.rarestardev.magneticplayer.entities.MusicOnPlayListEntity;
-import com.rarestardev.magneticplayer.entities.PlaylistEntity;
+import com.rarestardev.magneticplayer.database.dao.PlaylistDao;
+import com.rarestardev.magneticplayer.database.db.AppDatabase;
+import com.rarestardev.magneticplayer.database.db.DatabaseClient;
+import com.rarestardev.magneticplayer.database.entities.MusicOnPlayListEntity;
+import com.rarestardev.magneticplayer.database.entities.PlaylistEntity;
 import com.rarestardev.magneticplayer.model.MusicFile;
 import com.rarestardev.magneticplayer.repositories.PlaylistRepository;
 import com.rarestardev.magneticplayer.utilities.Constants;

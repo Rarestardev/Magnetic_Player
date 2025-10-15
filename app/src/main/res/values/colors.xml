@@ -4,22 +4,18 @@
     <color name="white">#FFFFFFFF</color>
 
 
-    <color name="background_center">#1D233A</color>
-
-
     <color name="top_panel_background_color_center">#CA527E</color>
     <color name="top_panel_background_color_start">#DC5678</color>
     <color name="top_panel_background_color_end">#AD4A89</color>
 
-    <color name="player_background">#E6121623</color>
+    <color name="player_background">#CC121623</color>
 
     <color name="icon__music_folder_color">#DC5678</color>
     <color name="progress_color">#DC5678</color>
 
-
-    <color name="mid_white_night_mode">#B4B1B1</color>
+    <color name="mid_white_night_mode">#C7C4C4</color>
     <color name="icons_night_mode">#F3F3F3</color>
-    <color name="second_color_night_mode">#12191F</color>
+    <color name="second_color_night_mode">#141414</color>
     <color name="window_background_night_mode">#0F0F0F</color>
 
     <color name="mid_white_light_mode">#2F2F2F</color>
@@ -32,4 +28,13 @@
 
     <color name="music_item_color_light_mode">#FFFFFF</color>
     <color name="music_item_color_night_mode">#191C1F</color>
+
+
+    <color name="base_color_theme">#DC5678</color>
+    <color name="dark_slate_gray_theme">#2D3D94</color>
+    <color name="red_color_theme">#F44336</color>
+    <color name="purple_color_theme">#7244C1</color>
+    <color name="orange_color_theme">#F4A93A</color>
+    <color name="green_color_theme">#4CAF50</color>
+
 </resources>
