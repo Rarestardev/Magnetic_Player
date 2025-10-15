@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isShowAllGenre"
+            type="Boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:background="?android:windowBackground"
+        tools:context=".music_utils.genre.GenreViewActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:padding="@dimen/padding_standard"
+            android:visibility="@{isShowAllGenre ? View.GONE : View.VISIBLE,default = gone}"
+            app:layout_constraintBottom_toTopOf="@id/banner_ad"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/app_bar">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/genre_cover"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="@dimen/margin_between_elements"
+                android:scaleType="fitXY"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:riv_corner_radius="@dimen/radius_size"
+                tools:src="@drawable/pop" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_genre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_between_elements"
+                android:layout_marginTop="@dimen/margin_between_elements"
+                android:layout_marginEnd="@dimen/margin_between_elements"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="?android:textColor"
+                android:textSize="@dimen/text_size_body1"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/genre_cover"
+                tools:text="@string/genre" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/genre_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/margin_between_elements"
+                android:layout_marginBottom="@dimen/margin_standard"
+                android:orientation="vertical"
+                android:layoutDirection="ltr"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_genre"
+                tools:listitem="@layout/item_music" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/no_genre_music"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/there_is_no_music_for_this_genre"
+                android:textColor="?colorSecondary"
+                android:textSize="@dimen/text_size_body1"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_genre" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:layoutDirection="ltr"
+            app:layout_constraintBottom_toTopOf="@id/banner_ad"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/app_bar"
+            android:visibility="@{isShowAllGenre ? View.VISIBLE : View.GONE,default = gone}"
+            android:padding="@dimen/padding_standard"
+            tools:listitem="@layout/item_music" />
+
+        <RelativeLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_app_bar"
+            android:paddingStart="@dimen/padding_standard"
+            android:paddingEnd="@dimen/padding_standard"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/back_activity"
+                android:layout_width="@dimen/icon_size_default"
+                android:layout_height="@dimen/icon_size_default"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_back"
+                android:tint="?iconTint" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/margin_standard"
+                android:layout_toEndOf="@id/back_activity"
+                android:text="@string/genre"
+                android:textSize="@dimen/text_size_app_name"
+                android:textStyle="bold"
+                android:visibility="@{isShowAllGenre ? View.VISIBLE : View.GONE,default = gone}" />
+
+        </RelativeLayout>
+
+        <com.adivery.sdk.AdiveryBannerAdView
+            android:id="@+id/banner_ad"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/ads_banner_small"
+            android:layout_marginStart="@dimen/ads_banner_small_margin_start_end"
+            android:layout_marginTop="@dimen/ads_banner_small_margin_top"
+            android:layout_marginEnd="@dimen/ads_banner_small_margin_start_end"
+            android:visibility="gone"
+            app:banner_size="banner"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

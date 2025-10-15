@@ -1,0 +1,63 @@
+🎵 About the App: MG Player (Music Player)
+
+MG Player is a beautifully designed, fast, and intelligent audio app that elevates your music experience. With a focus on visual harmony, precise controls, and smart organization, it’s crafted for both Iranian and global users who care deeply about how music feels and flows.
+
+🟣 Version 2.0.1 – A Professional Upgrade with Fresh Design
+
+- 🎨 Expanded Theme Colors
+Now choose from a variety of vibrant theme colors.
+
+- 🎚️ Advanced Equalizer
+Fine-tune your sound with a professional-grade equalizer.
+
+- 🧩 Complete UI Redesign
+A smoother, more modern interface for browsing and playing music.
+
+- 🎼 Genre-Based Categorization
+Music is now also sorted by genre for easier discovery.
+
+- 📱 New Playback Screen Design
+A fresh, intuitive layout for the music player screen.
+
+- 🇮🇷 Persian Language Support
+Full Farsi interface for native users.
+
+- 🌀 Animation Settings
+Customize animations to suit your style.
+
+- 🛠️ Bug Fixes & Performance Improvements
+Enhanced stability and resolved previous issues.
+
+---------
+
+🟢 Version 1.0.1 – A Smart and Stylish Beginning
+
+- 🎨 Dynamic Background Matching
+The app background intelligently adapts to the dominant color of each music cover.
+
+- 🔄 Circular Rotating Cover Animation
+While playing, the music cover rotates smoothly, adding a lively visual touch.
+
+- 📂 Custom Playlists
+Create your own playlists and keep your favorite tracks always within reach.
+
+- 🔍 Fast Music Search
+Quickly find any song with a simple search.
+
+- 🌗 Light & Dark Themes
+Choose your preferred color scheme to match your mood.
+
+- 🔒 Lock Screen & Status Bar Controls
+Manage playback without opening the app.
+
+- 🧠 Smart Music Categorization
+Your music is automatically organized by albums, artists, and folders.
+
+- ❤️ Favorites List
+Easily save and manage your favorite tracks.
+
+- ⚡ Fast & Stable Performance
+Enjoy smooth playback and a lag-free experience.
+
+
+Whether you're a casual listener or a music enthusiast, SoHeYL Music Player offers a refined, responsive, and visually expressive experience.

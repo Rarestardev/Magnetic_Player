@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:layout_marginBottom="6dp"
+    app:cardBackgroundColor="?colorPrimary"
+    app:cardCornerRadius="@dimen/radius_size">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/padding_standard"
+        android:paddingEnd="@dimen/padding_standard">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/genre_cover"
+            android:layout_width="@dimen/icon_size_large"
+            android:layout_height="@dimen/icon_size_large"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_oval="true"
+            tools:src="@drawable/pop" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_genre"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_standard"
+            android:layout_marginEnd="@dimen/margin_standard"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="?android:textColor"
+            android:textSize="@dimen/text_size_body1"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/genre_cover"
+            app:layout_constraintEnd_toStartOf="@id/forward_ic"
+            app:layout_constraintStart_toEndOf="@id/genre_cover"
+            app:layout_constraintTop_toTopOf="@id/genre_cover"
+            tools:text="@string/genre" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/forward_ic"
+            android:layout_width="@dimen/icon_size_default"
+            android:layout_height="@dimen/icon_size_default"
+            android:padding="3dp"
+            android:src="@drawable/ic_forward"
+            android:tint="?iconTint"
+            app:layout_constraintBottom_toBottomOf="@id/genre_cover"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/genre_cover" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

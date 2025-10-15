@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="isFolderView"
+            type="Boolean" />
+
+        <variable
+            name="loading"
+            type="Boolean" />
+
+        <variable
+            name="notFindFolder"
+            type="Boolean" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:background="?android:windowBackground"
+        tools:context=".music_utils.music_folder.FolderActivity">
+
+        <RelativeLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_app_bar"
+            android:paddingStart="@dimen/padding_standard"
+            android:paddingEnd="@dimen/padding_standard"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/back_activity"
+                android:layout_width="@dimen/icon_size_default"
+                android:layout_height="@dimen/icon_size_default"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_back"
+                app:tint="?iconTint" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/margin_standard"
+                android:layout_marginEnd="@dimen/margin_standard"
+                android:layout_toEndOf="@id/back_activity"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@={title}"
+                android:textColor="?android:textColor"
+                android:textSize="@dimen/text_size_app_name"
+                android:textStyle="bold"
+                tools:text="@string/tab_folders"
+                tools:ignore="RelativeOverlap" />
+
+            <ProgressBar
+                style="@android:style/Widget.DeviceDefault.Light.ProgressBar"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:indeterminate="true"
+                android:indeterminateTint="?colorSecondary"
+                android:progressTint="?colorSecondary"
+                android:secondaryProgressTint="?colorPrimary"
+                android:visibility="@{loading ? View.VISIBLE : View.GONE , default = gone}" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="@{isFolderView ? View.VISIBLE : View.GONE ,default = gone}"
+            app:layout_constraintBottom_toTopOf="@id/banner_ad"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/app_bar">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_folder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="true"
+                android:orientation="vertical"
+                android:padding="@dimen/padding_standard"
+                android:layoutDirection="ltr"
+                android:scrollbars="none"
+                android:visibility="@{notFindFolder ? View.GONE : View.VISIBLE ,default = gone}"
+                tools:listitem="@layout/music_folder_item" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/not_find_folder"
+                android:textColor="?colorSecondary"
+                android:textSize="@dimen/text_size_body1"
+                android:textStyle="bold"
+                android:visibility="@{notFindFolder ? View.VISIBLE : View.GONE ,default = gone}" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="@{isFolderView ? View.GONE : View.VISIBLE ,default = gone}"
+            app:layout_constraintBottom_toTopOf="@id/banner_ad"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/app_bar">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_music"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="true"
+                android:orientation="vertical"
+                android:padding="@dimen/padding_standard"
+                android:layoutDirection="ltr"
+                android:scrollbars="vertical"
+                android:visibility="@{loading ? View.GONE : View.VISIBLE , default = gone}" />
+
+        </RelativeLayout>
+
+
+        <com.adivery.sdk.AdiveryBannerAdView
+            android:id="@+id/banner_ad"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/ads_banner_small"
+            android:layout_marginStart="@dimen/ads_banner_small_margin_start_end"
+            android:layout_marginTop="@dimen/ads_banner_small_margin_top"
+            android:layout_marginEnd="@dimen/ads_banner_small_margin_start_end"
+            android:visibility="gone"
+            app:banner_size="banner"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

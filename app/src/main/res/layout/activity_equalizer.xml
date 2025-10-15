@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="showWaveformAndSpectrum"
+            type="Boolean" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:background="?android:windowBackground"
+        tools:context=".music_utils.equalizer.views.EqualizerActivity">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="48dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:background="?android:windowBackground"
+                android:paddingStart="@dimen/padding_standard"
+                android:paddingEnd="@dimen/padding_standard">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/back_activity"
+                    android:layout_width="@dimen/icon_size_default"
+                    android:layout_height="@dimen/icon_size_default"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:background="?selectableItemBackground"
+                    android:src="@drawable/ic_back" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/margin_standard"
+                    android:layout_toEndOf="@id/back_activity"
+                    android:text="@string/equalizer"
+                    android:textColor="?android:textColor"
+                    android:textSize="@dimen/text_size_app_name"
+                    android:textStyle="bold"
+                    tools:ignore="RelativeOverlap" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/equalizerSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:checked="false"
+                    android:hapticFeedbackEnabled="true"
+                    android:hyphenationFrequency="normalFast"
+                    app:thumbTint="?colorSecondary"
+                    app:thumbTintMode="multiply"
+                    app:trackDecorationTint="?colorSecondary"
+                    app:trackTint="?colorPrimary" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/eqLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/preset"
+                    android:textColor="?android:textColor"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/presetRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="vertical"
+                    android:overScrollMode="never"
+                    android:scrollbars="none"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/item_preset_card" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/settings_item_shape"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/bass_boost"
+                        android:textColor="?android:textColor"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/bassSeekBar"
+                        app:layout_constraintEnd_toEndOf="@+id/bassSeekBar"
+                        app:layout_constraintStart_toStartOf="@+id/bassSeekBar"
+                        app:layout_constraintTop_toTopOf="@+id/bassSeekBar"
+                        tools:ignore="VisualLintOverlap" />
+
+                    <com.rarestardev.magneticplayer.music_utils.equalizer.views.SemiCircleProgressBar
+                        android:id="@+id/bassSeekBar"
+                        android:layout_width="@dimen/circle_progress_eq_size"
+                        android:layout_height="@dimen/circle_progress_eq_size"
+                        android:layout_marginStart="@dimen/margin_standard"
+                        android:rotation="125"
+                        app:customColorValue="?colorSecondary"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_bass_boost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="?android:textColor"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/bassSeekBar"
+                        app:layout_constraintEnd_toEndOf="@+id/bassSeekBar"
+                        app:layout_constraintStart_toStartOf="@+id/bassSeekBar"
+                        tools:text="00" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/reverb_level"
+                        android:textColor="?android:textColor"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/reverbSeekBar"
+                        app:layout_constraintEnd_toEndOf="@+id/reverbSeekBar"
+                        app:layout_constraintStart_toStartOf="@+id/reverbSeekBar"
+                        app:layout_constraintTop_toTopOf="@+id/reverbSeekBar"
+                        tools:ignore="VisualLintOverlap" />
+
+                    <com.rarestardev.magneticplayer.music_utils.equalizer.views.SemiCircleProgressBar
+                        android:id="@+id/reverbSeekBar"
+                        android:layout_width="@dimen/circle_progress_eq_size"
+                        android:layout_height="@dimen/circle_progress_eq_size"
+                        android:rotation="125"
+                        app:customColorValue="?colorSecondary"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_reverb_level"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="?android:textColor"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/reverbSeekBar"
+                        app:layout_constraintEnd_toEndOf="@+id/reverbSeekBar"
+                        app:layout_constraintStart_toStartOf="@+id/reverbSeekBar"
+                        tools:text="00" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/loudness_gain"
+                        android:textColor="?android:textColor"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/loudnessSeekBar"
+                        app:layout_constraintEnd_toEndOf="@+id/loudnessSeekBar"
+                        app:layout_constraintStart_toStartOf="@+id/loudnessSeekBar"
+                        app:layout_constraintTop_toTopOf="@+id/loudnessSeekBar"
+                        tools:ignore="VisualLintOverlap" />
+
+                    <com.rarestardev.magneticplayer.music_utils.equalizer.views.SemiCircleProgressBar
+                        android:id="@+id/loudnessSeekBar"
+                        android:layout_width="@dimen/circle_progress_eq_size"
+                        android:layout_height="@dimen/circle_progress_eq_size"
+                        android:layout_marginEnd="@dimen/margin_standard"
+                        android:rotation="125"
+                        app:customColorValue="?colorSecondary"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_loudness_gain"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="?android:textColor"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/loudnessSeekBar"
+                        app:layout_constraintEnd_toEndOf="@+id/loudnessSeekBar"
+                        app:layout_constraintStart_toStartOf="@+id/loudnessSeekBar"
+                        tools:text="00" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/manual_adjustment"
+                    android:textColor="?android:textColor"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/bandRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    android:overScrollMode="never"
+                    android:scrollbars="none" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/waveform_spectrum_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_standard"
+                    android:background="@drawable/settings_item_shape"
+                    android:clickable="true"
+                    android:foreground="?selectableItemBackgroundBorderless"
+                    android:padding="@dimen/padding_standard">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/waveform_spectrumView"
+                        android:textColor="?android:textColor"
+                        android:textSize="@dimen/text_size_body1"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@id/waveformIconView"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/waveformIconView" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/waveformIconView"
+                        android:layout_width="@dimen/icon_size_default"
+                        android:layout_height="@dimen/icon_size_default"
+                        android:padding="3dp"
+                        android:src="@drawable/ic_forward"
+                        app:tint="?iconTint"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="@{showWaveformAndSpectrum ? View.VISIBLE : View.GONE , default = gone}"
+                        app:layout_constraintTop_toBottomOf="@id/waveformIconView">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="@string/waveform"
+                            android:textColor="?android:textColor" />
+
+                        <com.rarestardev.magneticplayer.music_utils.equalizer.views.VisualizerView
+                            android:id="@+id/visualizerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/settings_item_shape" />
+
+                        <com.google.android.material.divider.MaterialDivider
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="@string/spectrum_analyzer"
+                            android:textColor="?android:textColor" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/settings_item_shape"
+                            android:paddingStart="4dp"
+                            android:paddingTop="4dp"
+                            android:paddingEnd="4dp"
+                            android:paddingBottom="12dp">
+
+                            <com.rarestardev.magneticplayer.music_utils.equalizer.views.SpectrumView
+                                android:id="@+id/spectrumView"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+
+                        </RelativeLayout>
+
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </ScrollView>
+</layout>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="loading"
+            type="Boolean" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:context=".music_utils.artist.AllArtistViewActivity">
+
+        <RelativeLayout
+            android:id="@+id/custom_app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_app_bar"
+            android:elevation="@dimen/elevation_app_bar"
+            android:paddingStart="@dimen/padding_standard"
+            android:paddingEnd="@dimen/padding_standard"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/back_activity"
+                android:layout_width="@dimen/icon_size_default"
+                android:layout_height="@dimen/icon_size_default"
+                android:layout_centerVertical="true"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_back" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/margin_standard"
+                android:layout_toEndOf="@id/back_activity"
+                android:text="@string/artist"
+                android:textSize="@dimen/text_size_app_name"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <com.adivery.sdk.AdiveryBannerAdView
+            android:id="@+id/banner_ad"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/ads_banner_small"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="@dimen/ads_banner_small_margin_start_end"
+            android:layout_marginTop="@dimen/ads_banner_small_margin_top"
+            android:layout_marginEnd="@dimen/ads_banner_small_margin_start_end"
+            android:visibility="gone"
+            app:banner_size="banner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/custom_app_bar" />
+
+        <ProgressBar
+            style="@android:style/Widget.DeviceDefault.Light.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateTint="?colorSecondary"
+            android:progressTint="?colorSecondary"
+            android:secondaryProgressTint="?colorPrimary"
+            android:visibility="@{loading ? View.VISIBLE : View.GONE,default = gone}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/banner_ad" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/artist_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/margin_standard"
+            android:layout_marginBottom="@dimen/margin_standard"
+            android:orientation="vertical"
+            android:scrollbars="vertical"
+            android:visibility="@{loading ? View.GONE : View.VISIBLE,default = gone}"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/banner_ad"
+            tools:itemCount="10"
+            tools:listitem="@layout/artist_items_grid" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
