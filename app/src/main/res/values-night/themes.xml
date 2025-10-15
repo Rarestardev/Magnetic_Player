@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.MagneticPlayer" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/second_color_night_mode</item>
+        <item name="colorAccent">@color/music_item_color_night_mode</item>
+        <item name="android:windowBackground">@color/window_background_night_mode</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:textSize">@dimen/text_size_body2</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">sans-serif-light</item>
+        <item name="colorOnSecondary">@color/mid_white_night_mode</item>
+        <item name="android:screenOrientation">portrait</item>
+        <item name="iconTint">@color/icons_night_mode</item>
+        <item name="alertDialogStyle">@style/Theme.CustomThemeAlertDialog</item>
+    </style>
+
+    <style name="Theme.CustomThemeAlertDialog" parent="Theme.Material3.Dark.Dialog.Alert">
+        <!--Background color-->
+        <item name="android:background">@color/second_color_night_mode</item>
+
+        <!--tittle color-->
+        <item name="android:textColor">@color/white</item>
+
+        <!--text color of message-->
+        <item name="android:textColorPrimary">@color/white</item>
+
+        <!--text color of buttons-->
+        <item name="colorPrimary">@color/white</item>
+    </style>
+
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_in_up</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_down</item>
+    </style>
+
+    <style name="TransparentDialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowEnterAnimation">@anim/slide_in_up</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_down</item>
+    </style>
+
+    <style name="TransparentDialogFragment" parent="ThemeOverlay.AppCompat.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+</resources>

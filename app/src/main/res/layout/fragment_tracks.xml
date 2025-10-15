@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="4dp"
+    android:background="@android:color/transparent"
+    android:elevation="16dp"
+    android:padding="4dp"
+    tools:context=".view.fragments.TracksFragment">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/shuffle_play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="6dp"
+        android:backgroundTint="@color/top_panel_background_color_center"
+        android:elevation="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="@string/shuffle_play"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:cornerRadius="12dp"
+        app:icon="@drawable/ic_play_circle_filled"
+        app:iconGravity="start"
+        app:iconSize="@dimen/icon_size_small"
+        app:iconTint="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:rippleColor="?colorPrimary"
+        app:strokeColor="?colorOnSecondary"
+        app:strokeWidth="1dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/sortSong"
+        android:layout_width="40dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="6dp"
+        android:backgroundTint="@color/top_panel_background_color_center"
+        android:elevation="8dp"
+        android:padding="8dp"
+        app:cornerRadius="12dp"
+        app:icon="@drawable/ic_sort"
+        app:iconSize="@dimen/icon_size_default"
+        app:iconTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/shuffle_play"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/shuffle_play"
+        app:rippleColor="?colorPrimary"
+        app:strokeColor="?colorOnSecondary"
+        app:strokeWidth="1dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/trackListRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/sortSong"
+        tools:itemCount="5"
+        tools:listitem="@layout/item_music" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/not_find_tracks"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="@string/not_find_tracks"
+        android:textAlignment="gravity"
+        android:textColor="@color/mid_white_night_mode"
+        android:textSize="@dimen/text_size_body1"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/trackListRecyclerView"
+        app:layout_constraintEnd_toEndOf="@id/trackListRecyclerView"
+        app:layout_constraintStart_toStartOf="@id/trackListRecyclerView"
+        app:layout_constraintTop_toTopOf="@id/trackListRecyclerView" />
+
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sortSong" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

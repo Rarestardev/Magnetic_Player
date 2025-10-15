@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">Magnetic Player</string>
+
+    <!-- Main Activity Strings -->
+    <string name="play_list">Playlist</string>
+    <string name="recent_play"># Your Popular</string>
+
+    <!-- Tabs Title -->
+    <string name="tab_folders">Folders</string>
+
+    <!-- Tracks Fragment -->
+    <string name="shuffle_play">Shuffle Play</string>
+    <string name="Newest">Newest</string>
+    <string name="oldest_menu">Oldest</string>
+    <string name="alpha_menu">A - Z</string>
+
+    <!-- folder fragment -->
+    <string name="favoriteNoData">Not saved music!</string>
+    <string name="more">More</string>
+    <string name="popular">Popular</string>
+    <string name="not_find_tracks">Not found music files!</string>
+    <string name="search_hint">Search</string>
+    <string name="search_history">Search history</string>
+    <string name="result">Result</string>
+    <string name="not_find_artist">Not find artist!</string>
+    <string name="settings">Settings</string>
+    <string name="noPlaylist">No Playlist!</string>
+    <string name="save_new_playlist">Save</string>
+    <string name="details">Details</string>
+    <string name="share">Share</string>
+    <string name="showHidePopular">Show Popular Music</string>
+    <string name="theme">Theme</string>
+    <string name="auto">Auto</string>
+    <string name="lightMode">Light</string>
+    <string name="nightMode">Night</string>
+    <string name="versionApp">Version : 1.0</string>
+    <string name="show_cover">Show cover</string>
+    <string name="not_find_album">Not find album!</string>
+    <string name="not_find_folder">Not find folder music!</string>
+    <string name="support">Support</string>
+
+
+</resources>

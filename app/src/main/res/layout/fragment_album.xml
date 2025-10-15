@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.fragments.AlbumFragment">
+
+    <com.adivery.sdk.AdiveryBannerAdView
+        android:id="@+id/banner_ad"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/ads_banner_small"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"
+        android:layout_marginStart="@dimen/ads_banner_small_margin_start_end"
+        android:layout_marginTop="@dimen/ads_banner_small_margin_top"
+        android:layout_marginEnd="@dimen/ads_banner_small_margin_start_end"
+        app:banner_size="banner" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/albumRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:scrollbars="vertical"
+        android:visibility="gone" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/not_find"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_between_elements"
+        android:text="@string/not_find_album"
+        android:textSize="@dimen/text_size_body1"
+        android:textStyle="bold" />
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="?colorPrimary"
+    app:cardCornerRadius="@dimen/radius_size">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="@dimen/padding_standard">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/close_dialog"
+            android:layout_width="@dimen/icon_size_default"
+            android:layout_height="@dimen/icon_size_default"
+            android:foreground="?selectableItemBackgroundBorderless"
+            app:tint="?iconTint"
+            android:src="@drawable/ic_back" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/folder_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:layout_alignBaseline="@id/close_dialog"
+            android:layout_centerHorizontal="true"
+            android:maxLines="1"
+            android:textAlignment="gravity"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_app_name"
+            android:textStyle="bold"
+            tools:text="@string/tab_folders" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/folder_size"
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:layout_alignBaseline="@id/close_dialog"
+            android:layout_alignParentEnd="true"
+            android:maxLines="1"
+            android:textAlignment="gravity"
+            android:gravity="center"
+            android:textStyle="bold"
+            tools:text="( 45 )"
+            tools:ignore="RelativeOverlap" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/music_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/folder_name_tv"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/margin_between_elements"
+            android:orientation="vertical"
+            android:scrollbars="vertical"
+            tools:listitem="@layout/item_music" />
+
+        <com.adivery.sdk.AdiveryBannerAdView
+            android:id="@+id/banner_ad"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/ads_banner_small"
+            android:layout_below="@id/music_recyclerView"
+            android:layout_marginStart="@dimen/ads_banner_small_margin_start_end"
+            android:layout_marginTop="@dimen/ads_banner_small_margin_top"
+            android:layout_marginEnd="@dimen/ads_banner_small_margin_start_end"
+            app:banner_size="banner"
+            android:layout_centerHorizontal="true"
+            />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

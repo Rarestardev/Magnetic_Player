@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Margin and Padding -->
+    <dimen name="margin_standard">16dp</dimen>
+    <dimen name="padding_standard">12dp</dimen>
+    <dimen name="margin_between_elements">24dp</dimen>
+    <dimen name="margin_top_all_activity">25dp</dimen>
+
+    <!-- Typography -->
+    <dimen name="text_size_app_name">18sp</dimen>
+    <dimen name="text_size_body1">16sp</dimen>
+    <dimen name="text_size_body2">14sp</dimen>
+    <dimen name="text_size_button">14sp</dimen>
+    <dimen name="text_size_caption">12sp</dimen>
+
+    <!-- Elevation -->
+    <dimen name="elevation_default">2dp</dimen>
+    <dimen name="elevation_app_bar">4dp</dimen>
+    <dimen name="elevation_dialog">24dp</dimen>
+
+    <!-- Component Height -->
+    <dimen name="height_app_bar">56dp</dimen>
+
+    <!-- Icon Sizes -->
+    <dimen name="icon_size_small">22dp</dimen>
+    <dimen name="icon_size_default">26dp</dimen>
+    <dimen name="icon_size_large">36dp</dimen>
+    <dimen name="icon_size_extra_large">48dp</dimen>
+
+    <!-- MusicFile Image Sizes -->
+
+    <!-- NavigationView size -->
+
+    <!-- Corner View Radius -->
+    <dimen name="radius_size">12dp</dimen>
+
+    <!-- Tab Layout Sizes -->
+
+    <!-- Music player size -->
+    <dimen name="semi_circle_progress_bar">300dp</dimen>
+    <dimen name="music_cover">240dp</dimen>
+
+    <!-- Ads Banner height -->
+    <dimen name="ads_banner_small">50dp</dimen>
+    <dimen name="ads_banner_small_margin_start_end">12dp</dimen>
+    <dimen name="ads_banner_small_margin_top">10dp</dimen>
+
+    <!-- Recycler view items on MainActivity size (Horizontal) -->
+
+    <!-- Settings view -->
+    <dimen name="theme_card_view_width">80dp</dimen>
+
+
+</resources>

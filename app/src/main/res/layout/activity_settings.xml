@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".view.settings.SettingsActivity">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_app_bar"
+            android:layout_marginTop="@dimen/margin_top_all_activity"
+            android:elevation="@dimen/elevation_app_bar"
+            android:paddingStart="@dimen/padding_standard"
+            android:paddingEnd="@dimen/padding_standard">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/back_activity"
+                android:layout_width="@dimen/icon_size_default"
+                android:layout_height="@dimen/icon_size_default"
+                android:layout_centerVertical="true"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_back" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/margin_standard"
+                android:layout_toEndOf="@id/back_activity"
+                android:text="@string/settings"
+                android:textSize="@dimen/text_size_app_name"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <com.adivery.sdk.AdiveryBannerAdView
+            android:id="@+id/banner_ad"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/ads_banner_small"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="@dimen/ads_banner_small_margin_start_end"
+            android:layout_marginTop="@dimen/ads_banner_small_margin_top"
+            android:layout_marginEnd="@dimen/ads_banner_small_margin_start_end"
+            android:visibility="gone"
+            app:banner_size="banner" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:elevation="16dp"
+                android:orientation="vertical"
+                android:padding="@dimen/padding_standard">
+
+                <com.google.android.material.materialswitch.MaterialSwitch
+                    android:id="@+id/show_popular_music_switch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/settings_item_shape"
+                    android:checked="false"
+                    android:hapticFeedbackEnabled="true"
+                    android:hyphenationFrequency="normalFast"
+                    android:padding="@dimen/padding_standard"
+                    android:text="@string/showHidePopular"
+                    android:textSize="@dimen/text_size_body1"
+                    android:textStyle="bold"
+                    app:thumbTint="@color/settings_btn_color"
+                    app:thumbTintMode="multiply"
+                    app:trackDecorationTint="@color/settings_btn_color"
+                    app:trackTint="?android:windowBackground" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/margin_standard"
+                    android:background="@drawable/settings_item_shape"
+                    android:orientation="vertical"
+                    android:padding="@dimen/padding_standard">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/theme"
+                        android:textSize="@dimen/text_size_body1"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="8dp"
+                        app:dividerColor="?android:windowBackground" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <include
+                            android:id="@+id/autoMode"
+                            layout="@layout/theme_item"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp" />
+
+                        <include
+                            android:id="@+id/lightMode"
+                            layout="@layout/theme_item"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp" />
+
+                        <include
+                            android:id="@+id/nightMode"
+                            layout="@layout/theme_item"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/support"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_standard"
+                    android:background="@drawable/settings_item_shape"
+                    android:drawableEnd="@drawable/ic_forward"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/padding_standard"
+                    android:text="@string/support"
+                    android:textAlignment="gravity"
+                    android:textSize="@dimen/text_size_body1"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_standard"
+                    android:background="@drawable/settings_item_shape"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/padding_standard"
+                    android:text="@string/versionApp"
+                    android:textAlignment="gravity"
+                    android:textSize="@dimen/text_size_body1"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/margin_standard"
+                    android:background="@drawable/settings_item_shape"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/padding_standard"
+                    android:weightSum="3">
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/linkedin"
+                        android:layout_width="@dimen/icon_size_extra_large"
+                        android:layout_height="@dimen/icon_size_extra_large"
+                        android:layout_gravity="center_vertical"
+                        android:focusable="true"
+                        android:foreground="?selectableItemBackgroundBorderless"
+                        android:src="@drawable/icons_linkedin"
+                        app:riv_oval="true" />
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/instagram"
+                        android:layout_width="@dimen/icon_size_extra_large"
+                        android:layout_height="@dimen/icon_size_extra_large"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/margin_between_elements"
+                        android:layout_marginEnd="@dimen/margin_between_elements"
+                        android:focusable="true"
+                        android:foreground="?selectableItemBackgroundBorderless"
+                        android:src="@drawable/icons8_instagram"
+                        app:riv_oval="true" />
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/github"
+                        android:layout_width="@dimen/icon_size_extra_large"
+                        android:layout_height="@dimen/icon_size_extra_large"
+                        android:layout_gravity="center_vertical"
+                        android:focusable="true"
+                        android:foreground="?selectableItemBackgroundBorderless"
+                        android:src="@drawable/icons_github"
+                        app:riv_oval="true" />
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </ScrollView>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>
