@@ -84,7 +84,7 @@ Feel free to fork the repository, submit pull requests, or open issues to help i
 
 <p align="center">
   <a href="https://cafebazaar.ir/app/com.rarestardev.magneticplayer" target="_blank">
-    <img src="https://en.wikipedia.org/wiki/File:Cafe_Bazaar_logo.svg" alt="Cafe Bazaar Logo" width="20" style="vertical-align:middle; margin-right:8px;">
+    <img src="logo.png" width="20" style="vertical-align:middle; margin-right:8px;">
     <span style="font-size:16px; font-weight:bold; vertical-align:middle;">Download from Cafe Bazaar</span>
   </a>
 </p>
