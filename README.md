@@ -45,6 +45,15 @@ Mg Player offers a wide range of features to elevate your music experience:
 
 ---
 
+## 🖼️ Screenshots
+
+<img src="Blue Smartphone Promo Poster_20251017_203036_0000.jpg" width="360" height="720"/>
+<img src="Blue Smartphone Promo Poster_20251017_205439_0000.jpg" width="360" height="720" />
+<img src="Blue Smartphone Promo Poster_20251017_210154_0000.jpg" width="360" height="720" />
+<img src="Music App Instagram Post_20251017_201943_0000.jpg" width="360" height="720" />
+
+---
+
 ## 🚀 Upcoming Features
 
 Planned enhancements for future releases:
