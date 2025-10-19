@@ -47,7 +47,6 @@ public class PlaylistWithMusicAdapter extends RecyclerView.Adapter<PlaylistWithM
         holder.playlistName.setText(playlist.get(i).getPlaylistName());
 
         holder.item_music_recycler_view.setLayoutManager(new LinearLayoutManager(context));
-        holder.item_music_recycler_view.setHasFixedSize(true);
 
         holder.itemView.setOnClickListener(v -> {
             if (holder.item_music_recycler_view.getVisibility() == View.GONE) {
