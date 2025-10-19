@@ -80,6 +80,17 @@ Feel free to fork the repository, submit pull requests, or open issues to help i
 
 ---
 
+## ⬇️ Download
+
+<p align="center">
+  <a href="https://cafebazaar.ir/app/com.rarestardev.magneticplayer" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Cafebazaar-logo.png" alt="Cafe Bazaar Logo" width="20" style="vertical-align:middle; margin-right:8px;">
+    <span style="font-size:16px; font-weight:bold; vertical-align:middle;">Download from Cafe Bazaar</span>
+  </a>
+</p>
+
+---
+
 ## 📱 Connect with Me
 
 - [Instagram](https://www.instagram.com/rarestar.dev)
